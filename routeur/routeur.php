@@ -8,8 +8,9 @@
         public function __construct($request){
             $this->request = $request;
             $this->allRequest = [
-                'controllers' => [
-                    'url' => 'methode'
+                'EtudiantController' => [
+                    'index' => 'getAuth',
+                    'autentification-etudiant'=> 'authentification'
                 ],
 
                 'SystemeController' => [
@@ -22,9 +23,12 @@
         public function goToController(){
             //inclusion des controleurs
             require_once CONTROLLER.'SystemeController.php';
+            require_once CONTROLLER.'superGlobal.php';
+            require_once CONTROLLER.'EtudiantController.php';
 
             //inclusion des models
             require_once MODEL.'model.php';
+            require_once MODEL.'Etudiant.php';
 
 
             //instantiation du controleur et déclanchement de la méthode

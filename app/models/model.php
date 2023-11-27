@@ -3,7 +3,7 @@ class Model{
     protected $bdd;
 
     public function __construct(){
-        $this->bdd = new PDO("mysql:host=localhost;dbname=nomDeLaBdd", "user", 'password');//connexion à la bdd mysql
+        $this->bdd = new PDO("mysql:host=localhost;dbname=jevote", "root", '');//connexion à la bdd mysql
     }
 
     //cette méthode permet gérer l'authentification
