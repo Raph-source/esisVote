@@ -18,7 +18,8 @@
                     'voir-les-candidatures' => 'getDashboard',
                     'authentification-coordination' => 'authentification',
                     'valider-la-candidature'=> 'validerCandiature',
-                    'supprimer-la-candidature'=> 'supprimerCandiature'
+                    'supprimer-la-candidature'=> 'supprimerCandiature',
+                    'organiser-les-candidatures' => 'getFormOrganiserCandidature'
                 ],
 
                 'SystemeController' => [

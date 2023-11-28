@@ -27,7 +27,7 @@ class CoordinationController{
             if($this->model->authentification()){
                 $idPromotion = $this->model->getIdPromotion();
                 $_SESSION['idPromotion'] = $idPromotion;
-                $_SESSION['idCoord'] = $this->model->getId();
+                $_SESSION['idCoordination'] = $this->model->getId();
                 $_SESSION['matCoord'] = $this->model->getNom();
             
                 require_once VIEW.'coordination/option.php';
@@ -62,11 +62,16 @@ class CoordinationController{
             if(!isset($_SESSION)){
                 session_start();
             }
-    
-            $trouver = $this->model->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
+            
+            if(isset($_SESSION['idPromotion'])){
+                $trouver = $this->model->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
 
-            $notif = 'cadidature validée avec succès';
-            require_once VIEW.'coordination/dashboard.php';
+                $notif = 'cadidature validée avec succès';
+                require_once VIEW.'coordination/dashboard.php';
+            }
+            else{
+                CoordinationController::getAuth();
+            }
         }
         else{
             header('Location: _lock');
@@ -83,7 +88,16 @@ class CoordinationController{
             if(!isset($_SESSION)){
                 session_start();
             }
-    
+
+            if(isset($_SESSION['idPromotion'])){
+                $trouver = $this->model->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
+
+                $notif = 'cadidature suprimée avec succès';
+                require_once VIEW.'coordination/dashboard.php';
+            }
+            else{
+                CoordinationController::getAuth();
+            }
             $trouver = $this->model->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
 
             $notif = 'cadidature suprimée avec succès';
@@ -92,5 +106,22 @@ class CoordinationController{
         else{
             header('Location: _lock');
         }
+    }
+
+    public function getFormOrganiserCandidature():void{
+        if(!isset($_SESSION)){
+            session_start();
+        }
+
+        if(isset($_SESSION['idCoordination'])){
+            $idCoordination = $_SESSION['idCoordination'];
+            $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+    
+            require_once VIEW.'coordination/organiserCadidature.php';
+        }
+        else{
+            CoordinationController::getAuth();
+        }
+
     }
 }

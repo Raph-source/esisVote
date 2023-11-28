@@ -98,4 +98,16 @@ class Coordination extends Model{
         $requete->bindParam(":idCandidature", $idCandidature);
         $requete->execute();
     }
+
+    //recuperer toute les dates des elections
+    public function getDateCandidatureAndVote($idCoordination):array{
+        $requete = $this->bdd->prepare("SELECT * FROM election 
+        WHERE idCoordination = :idCoordination");
+
+        $requete->bindParam(":idCoordination", $idCoordination);
+        $requete->execute();
+
+        $trouver = $requete->fetchAll();
+        return $trouver;
+    }
 }
