@@ -15,11 +15,15 @@
 
                 'CoordinationController' => [
                     'motCleCoord' => 'getAuth',
-                    'authentification-coordination' => 'authentification'
+                    'voir-les-candidatures' => 'getDashboard',
+                    'authentification-coordination' => 'authentification',
+                    'valider-la-candidature'=> 'validerCandiature',
+                    'supprimer-la-candidature'=> 'supprimerCandiature'
                 ],
 
                 'SystemeController' => [
                     '404' => '_404',
+                    '_lock' => '_lock',
                     'retour' => 'retour'
                 ]
             ];

@@ -7,14 +7,14 @@
         }
         //cette méthode permet de gérer les boutons de retour
         public function retour():void{
-            if($this->superGlobal->issetGet(['url'])){
-                $vers = $this->superGlobal->get['url'];
+            if($this->superGlobal->issetGet(['vers'])){
+                $vers = $this->superGlobal->get['vers'];
 
-                if($vers == 'trouver1'){
-                    require_once VIEW.'destination1.php';
+                if($vers == 'authentification-coordination'){
+                    require_once VIEW.'coordination/authentification.php';
                 }
-                else if($vers == 'trouver2'){
-                    require_once VIEW.'destination2.php';
+                else if($vers == 'les-options-de-la-coordination'){
+                    require_once VIEW.'coordination/option.php';
                 }
 
             }
@@ -22,6 +22,11 @@
         //cette méthode renvoi vers une page en d'erreur 404
         public function _404():void{
             require_once VIEW.'_404.php';
+        }
+
+        //cette méthode block un user
+        public function _lock():void{
+            require_once VIEW.'_lock.php';
         }
     }
 ?>

@@ -50,4 +50,52 @@ class Coordination extends Model{
 
         return $trouver['id'];
     }
+
+    //cette méthode retourne toute les candidature d'une promotion 
+    public function getAllCandidatureByIdPromotion($idPromotion):array{
+        $requete = $this->bdd->prepare("SELECT * FROM candidat AS c 
+            INNER JOIN etudiant AS e ON c.idetudiant = e.idetudiant
+            INNER JOIN promotion AS p ON c.idpromotion = p.idpromotion
+            WHERE c.idpromotion = :idpromotion AND c.typeCandidature = 'promotionnel'");
+        
+        $requete->bindParam(":idpromotion", $idPromotion);
+        
+        $requete->execute();
+
+        $trouver = $requete->fetchAll();
+
+        return $trouver;
+    }
+    
+    //cette méthode valide un candidat
+    public function validerCandidat($idCandidature):void{
+        $requete = $this->bdd->prepare("UPDATE candidat SET status = 1 
+        WHERE idcandidature = :idcandidature");
+        $requete->bindParam(":idcandidature", $idCandidature);
+        $requete->execute();
+
+        $requete = $this->bdd->prepare("INSERT resultat(idcandidature) 
+        VALUES(:idcandidature)");
+        $requete->bindParam(":idcandidature", $idCandidature);
+
+        $requete->execute();
+    }
+
+    //cette méthode supprime un candidat
+    public function supprimerCandidat($idCandidature):void{
+        $requete = $this->bdd->prepare("DELETE FROM vote 
+        WHERE idCandidature = :idCandidature");
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+
+        $requete = $this->bdd->prepare("DELETE FROM resultat 
+        WHERE idcandidature = :idCandidature");
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+
+        $requete = $this->bdd->prepare("DELETE FROM candidat 
+        WHERE idcandidature = :idCandidature");
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+    }
 }
