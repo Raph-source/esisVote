@@ -13,6 +13,11 @@
                     'autentification-etudiant'=> 'authentification'
                 ],
 
+                'CoordinationController' => [
+                    'motCleCoord' => 'getAuth',
+                    'authentification-coordination' => 'authentification'
+                ],
+
                 'SystemeController' => [
                     '404' => '_404',
                     'retour' => 'retour'
@@ -25,10 +30,12 @@
             require_once CONTROLLER.'SystemeController.php';
             require_once CONTROLLER.'superGlobal.php';
             require_once CONTROLLER.'EtudiantController.php';
+            require_once CONTROLLER.'CoordinationController.php';
 
             //inclusion des models
             require_once MODEL.'model.php';
             require_once MODEL.'Etudiant.php';
+            require_once MODEL.'Coordination.php';
 
 
             //instantiation du controleur et déclanchement de la méthode
