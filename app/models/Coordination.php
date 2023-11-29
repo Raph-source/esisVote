@@ -108,6 +108,48 @@ class Coordination extends Model{
         $requete->execute();
 
         $trouver = $requete->fetchAll();
+
         return $trouver;
+    }
+
+    public function lancerCandidature($dateDebut, $dateFin, $idCoordination):void{
+        if(Coordination::verifLancement($idCoordination)){
+            $requete = $this->bdd->prepare('UPDATE election 
+            SET date_debut = :date_debut, date_fin = :date_fin
+            WHERE idCoordination = :idCoordination');
+
+            $requete->bindParam(':date_debut', $dateDebut);
+            $requete->bindParam(':date_fin', $dateFin);
+            $requete->bindParam(':idCoordination', $idCoordination);
+
+            $requete->execute();
+        }
+        else{	
+            $requete = $this->bdd->prepare('INSERT INTO election(date_debut, date_fin, idCoordination)
+            VALUES(:date_debut, :date_fin, :idCoordination)');
+            
+            $requete->bindParam(':date_debut', $dateDebut);
+            $requete->bindParam(':date_fin', $dateFin);
+            $requete->bindParam(':idCoordination', $idCoordination);
+    
+            $requete->execute();
+        }
+    }
+
+    /*  cette methode vérifie si les candidatures d'une promotion sont lancées afin
+    de savoir si il faut faire un UPDATE ou un INSERT
+    */
+    private function verifLancement($idCoordination):bool{
+        $requete = $this->bdd->prepare('SELECT * FROM election WHERE idCoordination = :idCoordination');
+        $requete->bindParam(':idCoordination', $idCoordination);
+
+        $requete->execute();
+
+        $trouver = $requete->fetchAll();
+
+        if(count($trouver) != 0)
+            return true;
+        return false;
+        
     }
 }
