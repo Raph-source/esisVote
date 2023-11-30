@@ -299,4 +299,9 @@ class CoordinationController{
             }
         }
     }
+
+    //cette méthode permet de publier le resultat des votes
+    public function publierResultat(){
+        
+    }
 }

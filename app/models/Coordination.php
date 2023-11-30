@@ -188,4 +188,23 @@ class Coordination extends Model{
         return false;
         
     }
+
+    //cette méthode retour les resultats de votes
+    public function getResultatPromotion($idPromotion):array
+    {
+        $requete = $this->bdd->prepare('SELECT * FROM candidat AS c 
+        INNER JOIN etudiant AS e
+        ON c.idetudiant = e.idetudiant
+        INNER JOIN promotion AS p
+        ON e.idpromotion = p.idpromotion
+        INNER JOIN resultat AS r
+        ON c.idcandidature = r.idcandidature
+        WHERE c.idpromotion = ?
+        AND c.status = 1 AND c.typeCandidature = "promotionnel"
+        ORDER BY r.nombreVoix DESC');
+
+        $requete->execute([$idPromotion]);
+        return $requete->fetchAll();
+    }
+
 }

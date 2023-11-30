@@ -22,7 +22,8 @@
                     'organiser-les-candidatures' => 'getFormOrganiserCandidature',
                     'form-organiser-les-candidatures' => 'organiserCadidature',
                     'lancer-les-votes' => 'getFormLancerVote',
-                    'lancement-vote' => 'lancerVote'
+                    'lancement-vote' => 'lancerVote',
+                    'publier-les-resultat' => 'publierResultat'
                 ],
 
                 'SystemeController' => [
