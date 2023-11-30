@@ -196,4 +196,107 @@ class CoordinationController{
             }
         }
     }
+
+    public function getFormLancerVote():void{
+        if(!isset($_SESSION)){
+            session_start();
+        }
+
+        if(isset($_SESSION['idCoordination'])){
+            $idCoordination = $_SESSION['idCoordination'];
+            $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+    
+            require_once VIEW.'coordination/lancerVote.php';
+        }
+        else{
+            CoordinationController::getAuth();
+        }
+    }
+
+    public function lancerVote():void{
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        if($this->superGlobal->noEmptyPost(['debutVote', 'finVote'])){
+            $debutVote = $this->superGlobal->post['debutVote'];
+            $finVote = $this->superGlobal->post['finVote'];
+
+            $debutVote = str_replace('T', ' ', $debutVote);
+            $finVote = str_replace('T', ' ', $finVote);
+
+            //récuperation de la date de fin de condidatures
+            if(isset($_SESSION['idCoordination'])){
+                $idCoordination = $_SESSION['idCoordination'];
+                $date = $this->model->getDateCandidatureAndVote($idCoordination);
+                
+                $finCandidature = $date[0]['date_fin'];
+
+                if($debutVote < $finVote){
+                    if($debutVote > $finCandidature){
+                        if($this->model->lancerVote($debutVote, $finVote, $idCoordination)){
+                            $notif = "les votes ont été lancées";
+                            
+                            if(isset($_SESSION['idCoordination'])){
+                                $idCoordination = $_SESSION['idCoordination'];
+                                $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                        
+                                require_once VIEW.'coordination/organiserCadidature.php';
+                            }
+                            else{
+                                CoordinationController::getAuth();
+                            }
+                        }
+                        else{
+                            $notif = "veuillez lancer les candidatures avant de lancer les votes";
+                            
+                            if(isset($_SESSION['idCoordination'])){
+                                $idCoordination = $_SESSION['idCoordination'];
+                                $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                                require_once VIEW.'coordination/lancerVote.php';
+                            }
+                            else{
+                                CoordinationController::getAuth();
+                            }
+                        }
+                    }
+                    else{
+                        $notif = "la date de début vote doit supérieure à la date de fin des candidatures";
+                        if(isset($_SESSION['idCoordination'])){
+                            $idCoordination = $_SESSION['idCoordination'];
+                            $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                            require_once VIEW.'coordination/lancerVote.php';
+                        }
+                        else{
+                            CoordinationController::getAuth();
+                        }                    
+                    }
+                }
+                else{
+                    $notif = "la date de début doit inférieure à la date de fin";
+                    if(isset($_SESSION['idCoordination'])){
+                        $idCoordination = $_SESSION['idCoordination'];
+                        $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                        require_once VIEW.'coordination/lancerVote.php';
+                    }
+                    else{
+                        CoordinationController::getAuth();
+                    }          
+                }
+            }
+            else{
+                CoordinationController::getAuth();
+            }
+        }
+        else{
+            $notif = "pas de champs vide svp !!!";
+            if(isset($_SESSION['idCoordination'])){
+                $idCoordination = $_SESSION['idCoordination'];
+                $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                require_once VIEW.'coordination/lancerVote.php';
+            }
+            else{
+                CoordinationController::getAuth();
+            }
+        }
+    }
 }

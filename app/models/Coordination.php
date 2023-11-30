@@ -113,7 +113,7 @@ class Coordination extends Model{
     }
 
     public function lancerCandidature($dateDebut, $dateFin, $idCoordination):void{
-        if(Coordination::verifLancement($idCoordination)){
+        if(Coordination::verifLancementCandidature($idCoordination)){
             $requete = $this->bdd->prepare('UPDATE election 
             SET date_debut = :date_debut, date_fin = :date_fin
             WHERE idCoordination = :idCoordination');
@@ -139,8 +139,44 @@ class Coordination extends Model{
     /*  cette methode vérifie si les candidatures d'une promotion sont lancées afin
     de savoir si il faut faire un UPDATE ou un INSERT
     */
-    private function verifLancement($idCoordination):bool{
+    public function verifLancementCandidature($idCoordination):bool{
         $requete = $this->bdd->prepare('SELECT * FROM election WHERE idCoordination = :idCoordination');
+        $requete->bindParam(':idCoordination', $idCoordination);
+
+        $requete->execute();
+
+        $trouver = $requete->fetchAll();
+
+        if(count($trouver) != 0)
+            return true;
+        return false;
+        
+    }
+
+    public function lancerVote($dateDebut, $dateFin, $idCoordination):bool{
+        if(Coordination::verifLancementCandidature($idCoordination)){
+            $requete = $this->bdd->prepare('UPDATE election 
+            SET dateDebutVote = :dateDebutVote, dateFinVote = :dateFinVote
+            WHERE idCoordination = :idCoordination');
+
+            $requete->bindParam(':dateDebutVote', $dateDebut);
+            $requete->bindParam(':dateFinVote', $dateFin);
+            $requete->bindParam(':idCoordination', $idCoordination);
+
+            $requete->execute();
+
+            return true;
+        }
+        else{	
+            return false;
+        }
+    }
+    /*cette methode vérifie si les votes d'une promotion sont lancés afin
+    de savoir si il faut faire un UPDATE ou un INSERT
+    */
+    public function verifLancementVote($idCoordination):bool{
+        $requete = $this->bdd->prepare('SELECT * FROM election 
+        WHERE dateDebutVote != NULL AND dateFinVote != NULL AND idCoordination = :idCoordination');
         $requete->bindParam(':idCoordination', $idCoordination);
 
         $requete->execute();

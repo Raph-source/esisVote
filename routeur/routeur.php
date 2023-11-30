@@ -20,7 +20,9 @@
                     'valider-la-candidature'=> 'validerCandiature',
                     'supprimer-la-candidature'=> 'supprimerCandiature',
                     'organiser-les-candidatures' => 'getFormOrganiserCandidature',
-                    'form-organiser-les-candidatures' => 'organiserCadidature'
+                    'form-organiser-les-candidatures' => 'organiserCadidature',
+                    'lancer-les-votes' => 'getFormLancerVote',
+                    'lancement-vote' => 'lancerVote'
                 ],
 
                 'SystemeController' => [

@@ -18,6 +18,8 @@
     echo $notif;
   }
 ?>
+
+<!-- affichage des dates -->
 <?php if(count($periode) > 0):?>
   <div class="container">
   <table class="table">
@@ -41,7 +43,7 @@
 <?php
   endif;
 ?>
-
+<a href="retour?vers=les-options-de-la-coordination">Retour</a>
 <?php
   require_once FOOTER;
 ?>
