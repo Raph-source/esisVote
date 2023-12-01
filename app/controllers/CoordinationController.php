@@ -53,7 +53,7 @@ class CoordinationController{
     }
 
     public function validerCandiature():void{
-        //verifer le paramètre
+        //verifer le paramètre  
         if($this->superGlobal->noEmptyGet(['idCandidature'])){
             $idCandidature = intval($this->superGlobal->get['idCandidature']);
             
@@ -227,28 +227,41 @@ class CoordinationController{
             //récuperation de la date de fin de condidatures
             if(isset($_SESSION['idCoordination'])){
                 $idCoordination = $_SESSION['idCoordination'];
-                $date = $this->model->getDateCandidatureAndVote($idCoordination);
-                
-                $finCandidature = $date[0]['date_fin'];
 
                 if($debutVote < $finVote){
-                    if($debutVote > $finCandidature){
-                        if($this->model->lancerVote($debutVote, $finVote, $idCoordination)){
-                            $notif = "les votes ont été lancées";
+                    if($this->model->checkLancementCandidature($idCoordination)){
+                        $date = $this->model->getDateCandidatureAndVote($idCoordination);
+                
+                        $finCandidature = $date[0]['date_fin'];
+                        if($debutVote > $finCandidature){
+                            if($this->model->lancerVote($debutVote, $finVote, $idCoordination)){
+                                $notif = "les votes ont été lancées";
+                                
+                                if(isset($_SESSION['idCoordination'])){
+                                    $idCoordination = $_SESSION['idCoordination'];
+                                    $periode = $this->model->getDateCandidatureAndVote($idCoordination);
                             
-                            if(isset($_SESSION['idCoordination'])){
-                                $idCoordination = $_SESSION['idCoordination'];
-                                $periode = $this->model->getDateCandidatureAndVote($idCoordination);
-                        
-                                require_once VIEW.'coordination/organiserCadidature.php';
+                                    require_once VIEW.'coordination/lancerVote.php';
+                                }
+                                else{
+                                    CoordinationController::getAuth();
+                                }
                             }
                             else{
-                                CoordinationController::getAuth();
+                                $notif = "veuillez lancer les candidatures avant de lancer les votes";
+                                
+                                if(isset($_SESSION['idCoordination'])){
+                                    $idCoordination = $_SESSION['idCoordination'];
+                                    $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                                    require_once VIEW.'coordination/lancerVote.php';
+                                }
+                                else{
+                                    CoordinationController::getAuth();
+                                }
                             }
                         }
                         else{
-                            $notif = "veuillez lancer les candidatures avant de lancer les votes";
-                            
+                            $notif = "la date de début vote doit supérieure à la date de fin des candidatures";
                             if(isset($_SESSION['idCoordination'])){
                                 $idCoordination = $_SESSION['idCoordination'];
                                 $periode = $this->model->getDateCandidatureAndVote($idCoordination);
@@ -256,11 +269,52 @@ class CoordinationController{
                             }
                             else{
                                 CoordinationController::getAuth();
+                            }                    
+                        }                    
+                        $date = $this->model->getDateCandidatureAndVote($idCoordination);
+                
+                        $finCandidature = $date[0]['date_fin'];
+                        if($debutVote > $finCandidature){
+                            if($this->model->lancerVote($debutVote, $finVote, $idCoordination)){
+                                $notif = "les votes ont été lancées";
+                                
+                                if(isset($_SESSION['idCoordination'])){
+                                    $idCoordination = $_SESSION['idCoordination'];
+                                    $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                            
+                                    require_once VIEW.'coordination/lancerVote.php';
+                                }
+                                else{
+                                    CoordinationController::getAuth();
+                                }
                             }
+                            else{
+                                $notif = "veuillez lancer les candidatures avant de lancer les votes";
+                                
+                                if(isset($_SESSION['idCoordination'])){
+                                    $idCoordination = $_SESSION['idCoordination'];
+                                    $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                                    require_once VIEW.'coordination/lancerVote.php';
+                                }
+                                else{
+                                    CoordinationController::getAuth();
+                                }
+                            }
+                        }
+                        else{
+                            $notif = "la date de début vote doit supérieure à la date de fin des candidatures";
+                            if(isset($_SESSION['idCoordination'])){
+                                $idCoordination = $_SESSION['idCoordination'];
+                                $periode = $this->model->getDateCandidatureAndVote($idCoordination);
+                                require_once VIEW.'coordination/lancerVote.php';
+                            }
+                            else{
+                                CoordinationController::getAuth();
+                            }                    
                         }
                     }
                     else{
-                        $notif = "la date de début vote doit supérieure à la date de fin des candidatures";
+                        $notif = "les candidature n'ont encore été lancée";
                         if(isset($_SESSION['idCoordination'])){
                             $idCoordination = $_SESSION['idCoordination'];
                             $periode = $this->model->getDateCandidatureAndVote($idCoordination);
@@ -268,8 +322,9 @@ class CoordinationController{
                         }
                         else{
                             CoordinationController::getAuth();
-                        }                    
+                        }
                     }
+
                 }
                 else{
                     $notif = "la date de début doit inférieure à la date de fin";
@@ -301,7 +356,45 @@ class CoordinationController{
     }
 
     //cette méthode permet de publier le resultat des votes
-    public function publierResultat(){
+    public function publierResultat():void{
+        if(!isset($_SESSION))
+            session_start();
+
+        if(isset($_SESSION['idCoordination'])){
+            $idCoordination = $_SESSION['idCoordination'];
+            $idPromotion = $_SESSION['idPromotion'];
+
+            if($this->model->checkLancementCandidature($idCoordination)){
+                if(!$this->model->checkLancementVote($idCoordination)){
+                    //récuperation de date de fin de vote et de la date actuelle
+                    $trouver = $this->model->getFinVote($idCoordination);
+                    $dateFinVote = $trouver['dateFinVote'];
         
+                    $dateActuelle = date('Y-m-d H:i');
+        
+                    if($dateActuelle > $dateFinVote){
+                        $this->model->setResultPublierTrue($idPromotion);
+        
+                        $notif = "le resultat  été publié avec succès";
+                        require_once VIEW."Coordination/option.php";
+                    }
+                    else{
+                        $notif = "les votes n'ont pas encore pris fin";
+                        require_once VIEW."Coordination/option.php";
+                    }
+                }
+                else{
+                    $notif = "les votes n'ont pas encore été lancée";
+                    require_once VIEW."Coordination/option.php"; 
+                }
+            }
+            else{
+                $notif = "veuillez lancer les candidatures";
+                require_once VIEW."Coordination/option.php";
+            }
+        }
+        else{
+            CoordinationController::getAuth();
+        }
     }
 }

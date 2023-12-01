@@ -113,7 +113,7 @@ class Coordination extends Model{
     }
 
     public function lancerCandidature($dateDebut, $dateFin, $idCoordination):void{
-        if(Coordination::verifLancementCandidature($idCoordination)){
+        if(Coordination::checkLancementCandidature($idCoordination)){
             $requete = $this->bdd->prepare('UPDATE election 
             SET date_debut = :date_debut, date_fin = :date_fin
             WHERE idCoordination = :idCoordination');
@@ -139,7 +139,7 @@ class Coordination extends Model{
     /*  cette methode vérifie si les candidatures d'une promotion sont lancées afin
     de savoir si il faut faire un UPDATE ou un INSERT
     */
-    public function verifLancementCandidature($idCoordination):bool{
+    public function checkLancementCandidature($idCoordination):bool{
         $requete = $this->bdd->prepare('SELECT * FROM election WHERE idCoordination = :idCoordination');
         $requete->bindParam(':idCoordination', $idCoordination);
 
@@ -154,7 +154,7 @@ class Coordination extends Model{
     }
 
     public function lancerVote($dateDebut, $dateFin, $idCoordination):bool{
-        if(Coordination::verifLancementCandidature($idCoordination)){
+        if(Coordination::checkLancementCandidature($idCoordination)){
             $requete = $this->bdd->prepare('UPDATE election 
             SET dateDebutVote = :dateDebutVote, dateFinVote = :dateFinVote
             WHERE idCoordination = :idCoordination');
@@ -174,9 +174,11 @@ class Coordination extends Model{
     /*cette methode vérifie si les votes d'une promotion sont lancés afin
     de savoir si il faut faire un UPDATE ou un INSERT
     */
-    public function verifLancementVote($idCoordination):bool{
+    public function checkLancementVote($idCoordination):bool{
         $requete = $this->bdd->prepare('SELECT * FROM election 
-        WHERE dateDebutVote != NULL AND dateFinVote != NULL AND idCoordination = :idCoordination');
+        WHERE dateDebutVote IS NOT NULL
+        AND dateFinVote IS NOT NULL
+        AND idCoordination = :idCoordination');
         $requete->bindParam(':idCoordination', $idCoordination);
 
         $requete->execute();
@@ -199,12 +201,34 @@ class Coordination extends Model{
         ON e.idpromotion = p.idpromotion
         INNER JOIN resultat AS r
         ON c.idcandidature = r.idcandidature
-        WHERE c.idpromotion = ?
+        WHERE c.idpromotion = :idPormotion
         AND c.status = 1 AND c.typeCandidature = "promotionnel"
         ORDER BY r.nombreVoix DESC');
-
-        $requete->execute([$idPromotion]);
+        $requete->bindParam(':idPormotion', $idPromotion);
+        
+        $requete->execute();
         return $requete->fetchAll();
+    }
+
+    //cette méthode met le à true la pulication des resultats
+    public function setResultPublierTrue($idPromotion):void{
+        $requete = $this->bdd->prepare('UPDATE promotion 
+        SET resultatPublier = true
+        WHERE idpromotion = :idpromotion');
+
+        $requete->bindParam(':idpromotion', $idPromotion);
+        $requete->execute();
+    }
+
+    //verifie la fin de vote
+    public function getFinVote($idCoordination):array{
+        $requete = $this->bdd->prepare('SELECT dateFinVote FROM election
+        WHERE idCoordination = :idCoordination');
+        $requete->bindParam(':idCoordination', $idCoordination);
+
+        $requete->execute();
+
+        return $requete->fetch();
     }
 
 }
