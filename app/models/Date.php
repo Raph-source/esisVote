@@ -92,15 +92,15 @@ class Date extends Model{
         return false;
         
     }
-    
-    //verifie la fin de vote
-    public function getFinVote($idCoordination):array{
-        $requete = $this->bdd->prepare('SELECT finVote FROM date
+    public function getAll($idPromotion):array{
+        $requete = $this->bdd->prepare('SELECT * FROM date
         WHERE idPromotion = :idPromotion');
-        $requete->bindParam(':idPromotion', $idCoordination);
+        $requete->bindParam(':idPromotion', $idPromotion);
 
         $requete->execute();
 
         return $requete->fetch();
     }
+
+    
 }

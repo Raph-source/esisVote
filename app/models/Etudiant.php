@@ -1,5 +1,11 @@
 <?php
 class Etudiant extends Model{
+    public $date;
+    
+    public function __construct(){
+        parent::__construct();
+        $this->date = new Date();
+    }
     private $matricule;
     private $password;
 

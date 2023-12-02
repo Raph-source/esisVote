@@ -149,9 +149,16 @@ class CoordinationController{
 
         if(isset($_SESSION['idPromotion'])){
             $idPromotion = $_SESSION['idPromotion'];
-            $periode = $this->model->date->getDateCandidatureAndVote($idPromotion);
+            //verifier les votes ne sont pas lancés
+            if(!$this->model->date->checkLancementVote($idPromotion)){
+                $periode = $this->model->date->getDateCandidatureAndVote($idPromotion);
     
-            require_once VIEW.'coordination/organiserCadidature.php';
+                require_once VIEW.'coordination/organiserCadidature.php';
+            }
+            else{
+                $notif = "les votes ont été lancés il n'est plus possible de lancer le candidature";
+                require_once VIEW.'coordination/option.php';
+            }
         }
         else{
             CoordinationController::getAuth();
@@ -399,7 +406,7 @@ class CoordinationController{
             if($this->model->date->checkLancementCandidature($idPromotion)){
                 if($this->model->date->checkLancementVote($idPromotion)){
                     //récuperation de date de fin de vote et de la date actuelle
-                    $trouver = $this->model->date->getFinVote($idPromotion);
+                    $trouver = $this->model->date->getAll($idPromotion);
                     $dateFinVote = $trouver['finVote'];
         
                     $dateActuelle = date('Y-m-d H:i');

@@ -25,9 +25,12 @@ class EtudiantController{
 
                 //mise de données en session 
                 $_SESSION['prenom'] = $data['prenom'];
-                $_SESSION['idEtudiant'] = $data['id'];
+                $_SESSION['idEtudiant'] = $data['idEtudiant'];
                 $_SESSION['idPromotion'] = $data['idPromotion'];      
                 $_SESSION['idCoordination'] = $data['idCoordination'];    
+                
+                //recuperation des dates
+                $date = $this->model->date->getAll($data['idPromotion']);
                 
                 require_once VIEW.'etudiant/accueil.php';
             }
