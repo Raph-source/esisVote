@@ -25,8 +25,8 @@
     <tbody>
       <?php foreach($periode as $p):?>
       <tr>
-        <td><?= $p['dateDebutVote'] ?></td>
-        <td><?= $p['dateFinVote'] ?></td>
+        <td><?= $p['debutVote'] ?></td>
+        <td><?= $p['finVote'] ?></td>
       </tr>  
       <?php 
         endforeach;

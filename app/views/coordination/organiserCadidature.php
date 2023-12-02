@@ -32,8 +32,8 @@
     <tbody>
       <?php foreach($periode as $p):?>
       <tr>
-        <td><?= $p['date_debut'] ?></td>
-        <td><?= $p['date_fin'] ?></td>
+        <td><?= $p['debutCandidature'] ?></td>
+        <td><?= $p['finCandidature'] ?></td>
       </tr>  
       <?php 
         endforeach;

@@ -19,11 +19,12 @@
                     'authentification-coordination' => 'authentification',
                     'valider-la-candidature'=> 'validerCandiature',
                     'supprimer-la-candidature'=> 'supprimerCandiature',
-                    'organiser-les-candidatures' => 'getFormOrganiserCandidature',
-                    'form-organiser-les-candidatures' => 'organiserCadidature',
+                    'lancer-les-candidatures' => 'getFormOrganiserCandidature',
+                    'form-organiser-les-candidatures' => 'lancerCadidature',
                     'lancer-les-votes' => 'getFormLancerVote',
                     'lancement-vote' => 'lancerVote',
-                    'publier-les-resultat' => 'publierResultat'
+                    'publier-les-resultat' => 'publierResultat',
+                    'l2' => 'choixGroupe'
                 ],
 
                 'SystemeController' => [
@@ -42,7 +43,10 @@
             require_once CONTROLLER.'CoordinationController.php';
 
             //inclusion des models
-            require_once MODEL.'model.php';
+            require_once MODEL.'Model.php';
+            require_once MODEL.'Candidature.php';
+            require_once MODEL.'Promotion.php';
+            require_once MODEL.'Date.php';
             require_once MODEL.'Etudiant.php';
             require_once MODEL.'Coordination.php';
 
