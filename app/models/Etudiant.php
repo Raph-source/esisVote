@@ -16,17 +16,13 @@ class Etudiant extends Model{
 
     //cette fonction retourne les données l'étudiant
     public function getData():array{
-        $requete = $this->bdd->prepare('SELECT * FROM etudiant 
-        WHERE matricule = :matricule AND mdp = :password');
-
-        $requete->bindParam(':matricule', $this->matricule);
-        $requete->bindParam(':password', $this->password);
-        $requete->execute();
-
-        return $requete->fetch();
-    }
-    public function getIdCoord():int{
-        $requete = $this->bdd->prepare('SELECT idpromotion FROM etudiant 
+        $requete = $this->bdd->prepare('SELECT p.id AS idPromotion,
+        e.prenom AS prenom,
+        e.id AS idEtudiant,
+        p.idCoordination AS idCoordination
+        FROM etudiant AS e
+        INNER JOIN promotion AS p
+        ON e.idPromotion = p.id
         WHERE matricule = :matricule AND mdp = :password');
 
         $requete->bindParam(':matricule', $this->matricule);
@@ -35,16 +31,6 @@ class Etudiant extends Model{
         $requete->execute();
         $trouver = $requete->fetch();
 
-        $idPromotion = $trouver['idpromotion'];
-
-        $requete = $this->bdd->prepare('SELECT id FROM coordination WHERE idPromotion = :idPromotion');
-        $requete->bindParam(':idPromotion', $idPromotion);
-
-        $requete->execute();
-        $trouver = $requete->fetch();
-
-        $idCoordination = $trouver['id'];
-
-        return $idCoordination;
+        return $trouver;
     }
 }

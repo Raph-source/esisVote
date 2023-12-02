@@ -24,10 +24,10 @@ class EtudiantController{
                 $data = $this->model->getData();
 
                 //mise de données en session 
-                $_SESSION['utilisateur'] = $data['matricule'];
-                $_SESSION['idEtudiant'] = $data['idetudiant'];
-                $_SESSION['idPromotion'] = $data['idpromotion'];      
-                $_SESSION['idCoordination'] = $this->model->getIdCoord();    
+                $_SESSION['prenom'] = $data['prenom'];
+                $_SESSION['idEtudiant'] = $data['id'];
+                $_SESSION['idPromotion'] = $data['idPromotion'];      
+                $_SESSION['idCoordination'] = $data['idCoordination'];    
                 
                 require_once VIEW.'etudiant/accueil.php';
             }
