@@ -176,4 +176,8 @@ class EtudiantController{
             EtudiantController::getAuth();
         }
     }
+
+    public function teste(){
+        echo 'ici';
+    }
 }

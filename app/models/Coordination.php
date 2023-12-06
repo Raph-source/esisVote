@@ -57,4 +57,13 @@ class Coordination extends Model{
         $this->candidature->delete($idPromotion);
     }
 
+    public function getNom($id):array{
+        $requete = $this->bdd->prepare('SELECT pseudo FROM 
+        coordination WHERE id = :id');
+        $requete->bindParam(':id', $id);
+        $requete->execute();
+
+        return $requete->fetch();
+    }
+
 }

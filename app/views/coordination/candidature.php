@@ -4,7 +4,7 @@
 
 ?>
 <?php if(count($trouver) != 0):?>
-  <table>
+  <table border=1>
     <thead>
       <tr>
         <th>Profil</th>

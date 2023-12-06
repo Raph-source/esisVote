@@ -12,7 +12,9 @@
                     'index' => 'getAuth',
                     'autentification-etudiant'=> 'authentification',
                     'postuler' => 'getFormPostuler',
-                    'candidature etudiant' => 'postuler'
+                    'candidature etudiant' => 'postuler',
+                    'voter' => 'getFormVoter',
+                    'voix etudiant' => 'voter',
                 ],
 
                 'CoordinationController' => [

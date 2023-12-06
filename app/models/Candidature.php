@@ -46,6 +46,7 @@ class Candidature extends Model{
 
         return count($trouver);
     }
+
     //cette méthode valide un candidat
     public function validerCandidat($idCandidature):void{
         $requete = $this->bdd->prepare("UPDATE candidature SET status = 1 
@@ -93,9 +94,9 @@ class Candidature extends Model{
     }
 
     public function getNumberCandidature($idPromotion):int{
-        $requete = $this->bdd->prepare("SELECT * FROM cadidature AS c
+        $requete = $this->bdd->prepare("SELECT * FROM candidature AS c
         INNER JOIN etudiant AS e
-        ON e.id = c.idEtudiant
+        ON c.idEtudiant = e.id
         WHERE e.idPromotion = :idPromotion");
 
         $requete->bindParam(":idPromotion", $idPromotion);
@@ -106,12 +107,13 @@ class Candidature extends Model{
     }
     
     public function delete($idPromotion):void{
+    
         $trouver = Candidature::getAllCandidatureByIdPromotion($idPromotion);
 
         foreach($trouver as $candidature){
-            $requete = $this->bdd->prepare("DELETE FROM cadidature
+            $requete = $this->bdd->prepare("DELETE FROM candidature
             WHERE idEtudiant = :idEtudiant");
-            $requete->bindParam(":idEtudiant", $trouver['idEtudiant']);
+            $requete->bindParam(":idEtudiant", $candidature['idEtudiant']);
             $requete->execute();
         }
     }

@@ -9,7 +9,7 @@ class Voix extends Model{
         ON v.idCandidature = c.id
         WHERE e.idPromotion = :idPromotion
         AND c.status = 1
-        ORDER BY v.nombre DESC');
+        ');
         
         $requete->bindParam(':idPromotion', $idPromotion);
         
@@ -58,5 +58,17 @@ class Voix extends Model{
             $requete->bindParam(":idCandidature", $voix['idCandidature']);
             $requete->execute();
         }
+    }
+
+    public function checkValidation($idCandidature):bool{
+        $requete = $this->bdd->prepare("SELECT * FROM voix
+        WHERE idCandidature = :idCandidature");
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+        $trouver = $requete->fetchAll();
+
+        if(count($trouver) > 0)
+            return true;
+        return false;
     }
 }
