@@ -1,10 +1,12 @@
 <?php
 class Etudiant extends Model{
     public $date;
+    public $promotion;
     
     public function __construct(){
         parent::__construct();
         $this->date = new Date();
+        $this->promotion = new Promotion();
     }
     private $matricule;
     private $password;

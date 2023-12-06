@@ -18,4 +18,13 @@ class Promotion extends Model{
 
         return $requete->fetch();
     }
+
+    public function getResultatPublie($idPromotion):array{
+        $requete = $this->bdd->prepare('SELECT resultatPublie FROM promotion
+        WHERE id = :idPromotion');
+        $requete->bindParam(':idPromotion', $idPromotion);
+        $requete->execute();    
+
+        return $requete->fetch();
+    }
 }

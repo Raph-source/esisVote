@@ -185,7 +185,7 @@ class CoordinationController{
                     if(isset($_SESSION['idPromotion'])){
                         //enregister les dates
                         $idPromotion = $_SESSION['idPromotion'];
-                        $this->model->date->lancerCandidature($dateDebutCandidature, $dateDebutCandidature, $idPromotion);
+                        $this->model->date->lancerCandidature($dateDebutCandidature, $dateFinCandidature, $idPromotion);
                         
                         $notif = "les candidatures ont été lancées";
                         

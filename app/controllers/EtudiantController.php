@@ -29,13 +29,16 @@ class EtudiantController{
                 $_SESSION['idPromotion'] = $data['idPromotion'];      
                 $_SESSION['idCoordination'] = $data['idCoordination'];    
                 
-                //recuperation des dates
+                //recuperation des dates et du status de publication des resultats
                 $date = $this->model->date->getAll($data['idPromotion']);
+                $resultatPublie = $this->model->promotion->getResultatPublie($data['idPromotion']);
+                $resultatPublie = $resultatPublie['resultatPublie'];
                 
+                $dateActuelle = date('Y-m-d H:i');
+
                 require_once VIEW.'etudiant/accueil.php';
             }
-            else
-            {
+            else{
                 $notif = "matricule ou mot de passe incorrect";
                 require_once VIEW.'etudiant/authentification.php';
             }
