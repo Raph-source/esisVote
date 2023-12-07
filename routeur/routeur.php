@@ -29,7 +29,9 @@
                     'lancement-vote' => 'lancerVote',
                     'publier-les-resultat' => 'publierResultat',
                     'l2' => 'choixGroupe',
-                    'relancer-les-votes' => 'relancerVote'
+                    'relancer-les-votes' => 'relancerVote',
+                    'mot de passe' => 'getFormChangerMotDePasse',
+                    'changer mot de passe' => 'changerMotDePasse'
                 ],
 
                 'SystemeController' => [

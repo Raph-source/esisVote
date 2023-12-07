@@ -488,4 +488,45 @@ class CoordinationController{
             CoordinationController::getAuth();
         }
     }
+
+    public function getFormChangerMotDePasse():void{
+        require_once VIEW.'coordination/changerMotDePasse.php';
+    }
+
+    public function changerMotDePasse():void{
+        if($this->superGlobal->noEmptyPost(['oldMdp', 'newMdp', 'confMdp'])){
+            $oldMdp = $this->superGlobal->post['oldMdp'];
+            $newMdp = $this->superGlobal->post['newMdp'];
+            $confMdp = $this->superGlobal->post['confMdp'];
+            
+            if(!isset($_SESSION))
+                session_start();
+
+            if(isset($_SESSION['idCoordination'])){
+                if($this->model->checkPasseWord($oldMdp, $_SESSION['idCoordination'])){
+                    if($newMdp == $newMdp){
+                        $this->model->changePasseWord($newMdp, $_SESSION['idCoordination']);
+    
+                        $notif = "mot de passe modifié avec succès. Veuillez vous connecter avec le nouveau mot de passe";
+                        require_once VIEW.'coordination/authentification.php';
+                    }
+                    else{
+                        $notif = "impatibilité entre le nouveau mot de passe et sa confimation";
+                        require_once VIEW.'coordination/changerMotDePasse.php';
+                    }
+                }
+                else{
+                    $notif = "L'ancien mot de passe est incorrecte";
+                    require_once VIEW.'coordination/changerMotDePasse.php';
+                }
+            }
+            else{
+                CoordinationController::getAuth();
+            }
+        }
+        else{
+            $notif = "pas de champs vide svp!!!";
+            require_once VIEW.'coordination/changerMotDePasse.php';
+        }
+    }
 }

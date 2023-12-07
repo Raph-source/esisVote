@@ -7,6 +7,7 @@
 <a href="lancer-les-votes">lancer les votes</a><br>
 <a href="publier-les-resultat">publlier les resultats</a><br>
 <a href="relancer-les-votes">relancer les elections</a><br>
+<a href="mot de passe">Changer le mot de passe</a><br>
 <?php
     echo 'coordination '. $coordination . '<br>';
     echo 'nombre candidature '. $nombreCandidature . '<br>';

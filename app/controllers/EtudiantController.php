@@ -177,7 +177,9 @@ class EtudiantController{
         }
     }
 
-    public function teste(){
-        echo 'ici';
+    public function voter(){
+        if($this->SuperGlobal->noEmptyPost(['voix'])){
+            
+        }
     }
 }
