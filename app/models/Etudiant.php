@@ -1,15 +1,18 @@
 <?php
 class Etudiant extends Model{
+    private $matricule;
+    private $password;
     public $date;
     public $promotion;
+    public $candidature;
+
     
     public function __construct(){
         parent::__construct();
         $this->date = new Date();
         $this->promotion = new Promotion();
+        $this->candidature = new Candidature();
     }
-    private $matricule;
-    private $password;
 
     public function setAttribut($matricule, $password):void{
         $this->matricule = $matricule;
@@ -41,4 +44,6 @@ class Etudiant extends Model{
 
         return $trouver;
     }
+
+
 }

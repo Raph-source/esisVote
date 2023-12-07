@@ -1,5 +1,16 @@
 <?php
 class Candidature extends Model{
+    private $idEtudiant;
+    private $projet;
+    private $photo;
+    private $video;
+
+    public function setAttribut($idEtudiant, $projet, $photo, $video){
+        $this->idEtudiant = $idEtudiant;
+        $this->projet = $projet;
+        $this->photo = $photo;
+        $this->video = $video;
+    }
     //cette méthode retourne toute les candidature d'une promotion 
     public function getAllCandidatureByIdPromotion($idPromotion):array{
         $requete = $this->bdd->prepare("SELECT e.nom AS nom, 
@@ -24,7 +35,17 @@ class Candidature extends Model{
 
         return $trouver;
     }
-    
+    public function getNombreCandidature($idPromotion):int{
+        $requete = $this->bdd->prepare("SELECT * FROM candidature AS c
+        INNER JOIN etudiant AS e
+        ON c.idEtudiant = e.id
+        WHERE e.idPromotion = :idPromotion");
+        $requete->bindParam(":idPromotion", $idPromotion);
+        $requete->execute();
+        $trouver = $requete->fetchAll();
+
+        return count($trouver);
+    }
     //cette méthode valide un candidat
     public function validerCandidat($idCandidature):void{
         $requete = $this->bdd->prepare("UPDATE candidature SET status = 1 
@@ -79,5 +100,31 @@ class Candidature extends Model{
             $requete->bindParam(":idEtudiant", $trouver['idEtudiant']);
             $requete->execute();
         }
+    }
+
+    public function checkExistance():bool{
+        $requete = $this->bdd->prepare('SELECT * FROM candidature
+        WHERE idEtudiant = :idEtudiant');
+        $requete->bindParam(':idEtudiant', $this->idEtudiant);
+        $requete->execute();
+        $trouver = $requete->fetchAll();
+
+        if(count($trouver) != 0)
+            return true;
+        return false;
+    }
+
+    public function save():void{
+
+        $requete = $this->bdd->prepare('INSERT INTO candidature
+        (idEtudiant, projet, photo, video)
+        VALUES(:idEtudiant, :projet, :photo, :video)');
+
+        $requete->bindParam(':idEtudiant', $this->idEtudiant);
+        $requete->bindParam(':projet', $this->projet);
+        $requete->bindParam(':photo', $this->photo);
+        $requete->bindParam(':video', $this->video);
+        
+        $requete->execute();
     }
 }

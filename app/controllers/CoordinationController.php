@@ -435,7 +435,7 @@ class CoordinationController{
         }
         
     }
-    private function getDashboard($idPromotion, $notif):void{
+    public function getDashboard($idPromotion, $notif):void{
         //recuperation des données
         $nombreCandidature = $this->model->candidature->getNumberCandidature($idPromotion);
         $nombreVoix = $this->model->voix->getNumberVoix($idPromotion);

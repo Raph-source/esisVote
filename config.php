@@ -36,9 +36,9 @@ define('ASSETS_IMG', HOST.'assets/img/');
 define('BIBLIOTHEQUE', ROOT.'bibliotheque/');
 
 //chemin et lien absolu vers les dossiers uploads
-define('UPLOADS', ROOT.'uploads/');
+define('UPLOADS_PATH', ROOT.'uploads/');
 define('UPLOADS_LINK', HOST.'uploads/');
 
 //chemin et lien absolu vers le dossier storage
-define('STORAGE', ROOT.'storage/');
+define('STORAGE_PATH', ROOT.'storage/');
 define('STORAGE_LINK', HOST.'storage/');

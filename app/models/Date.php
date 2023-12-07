@@ -92,7 +92,7 @@ class Date extends Model{
         return false;
         
     }
-    public function getAll($idPromotion):array{
+    public function getAll($idPromotion){
         $requete = $this->bdd->prepare('SELECT * FROM date
         WHERE idPromotion = :idPromotion');
         $requete->bindParam(':idPromotion', $idPromotion);

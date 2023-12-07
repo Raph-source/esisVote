@@ -11,7 +11,8 @@
                 'EtudiantController' => [
                     'index' => 'getAuth',
                     'autentification-etudiant'=> 'authentification',
-                    'postuler' => 'getFormPostuler'
+                    'postuler' => 'getFormPostuler',
+                    'candidature etudiant' => 'postuler'
                 ],
 
                 'CoordinationController' => [
@@ -39,10 +40,10 @@
         //cette fonction renvoi au controleur demandé
         public function goToController(){
             //inclusion des controleurs
-            require_once CONTROLLER.'SystemeController.php';
-            require_once CONTROLLER.'superGlobal.php';
+            require_once CONTROLLER.'SuperGlobal.php';
             require_once CONTROLLER.'EtudiantController.php';
             require_once CONTROLLER.'CoordinationController.php';
+            require_once CONTROLLER.'SystemeController.php';
 
             //inclusion des models
             require_once MODEL.'Model.php';
