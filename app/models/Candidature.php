@@ -62,6 +62,20 @@ class Candidature extends Model{
 
     //cette méthode supprime un candidat
     public function supprimerCandidat($idCandidature):void{
+        $requete = $this->bdd->prepare("SELECT video, photo FROM candidature
+        WHERE id = :idCandidature");
+        
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+        $trouver = $requete->fetch();
+        
+        //suppression des fichier du dossier
+      
+        $pathVideo = str_replace(UPLOADS_LINK, UPLOADS_PATH, $trouver["video"]);
+        $pathPhoto = str_replace(UPLOADS_LINK, UPLOADS_PATH, $trouver["photo"]);
+        unlink($pathVideo);
+        unlink($pathPhoto);
+
         $requete = $this->bdd->prepare("DELETE FROM vote 
         WHERE idCandidature = :idCandidature");
         $requete->bindParam(":idCandidature", $idCandidature);
