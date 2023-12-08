@@ -71,4 +71,21 @@ class Voix extends Model{
             return true;
         return false;
     }
+
+    public function setVoix($idCandidature):void{
+        $requete = $this->bdd->prepare("SELECT nombre FROM voix
+        WHERE idCandidature = :idCandidature");
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+        $trouver = $requete->fetch();
+
+        $nombre = $trouver['nombre'];
+        $nombre++;
+        
+        $requete = $this->bdd->prepare("UPDATE voix SET nombre = :nombre
+        WHERE idCandidature = :idCandidature");
+        $requete->bindParam(":nombre", $nombre);
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+    }
 }

@@ -14,7 +14,7 @@ require_once HEADER;
     if(isset($notif))
       echo $notif;
   ?>
-  <a href="retour?vers=option etuddiant">Retour</a>
+  <a href="retour?vers=option etudiant">Retour</a>
 <?php
   require_once FOOTER;
 ?>

@@ -23,10 +23,8 @@ class EtudiantController{
 
             //verification de l'authentification de l'étudiant
             if ($this->model->authentification()){
-
+                //mise de données en session
                 $data = $this->model->getData();
-
-                //mise de données en session 
                 $_SESSION['prenom'] = $data['prenom'];
                 $_SESSION['idEtudiant'] = $data['idEtudiant'];
                 $_SESSION['idPromotion'] = $data['idPromotion'];      
@@ -39,7 +37,7 @@ class EtudiantController{
                 
                 $dateActuelle = date('Y-m-d H:i');
 
-                require_once VIEW.'etudiant/accueil.php';
+                require_once VIEW.'etudiant/acceuil.php';
             }
             else{
                 $notif = "matricule ou mot de passe incorrect";
@@ -66,7 +64,7 @@ class EtudiantController{
                 }
                 else{
                     $notif = "le nombre maximal des candidature à déjà était atteint";
-                    require_once VIEW.'etudiant/accueil.php';
+                    require_once VIEW.'etudiant/acceuil.php';
                 }
             }
             else{
@@ -130,7 +128,7 @@ class EtudiantController{
                                             $date = $this->model->date->getAll($_SESSION['idPromotion']);
                                             $dateActuelle = date('Y-m-d H:i');
                                             $notif = 'Candidature enregistrée!';
-                                            require_once VIEW.'etudiant/accueil.php';
+                                            require_once VIEW.'etudiant/acceuil.php';
                                         }
                                         else{
                                             $notif = 'Vous ne pouvez pas postuler plus d\'une fois!';
@@ -177,7 +175,82 @@ class EtudiantController{
         }
     }
 
-    public function teste(){
-        echo 'ici';
+    public function getPageVoter(){
+        if(!isset($_SESSION))
+            session_start();
+        
+        if(isset($_SESSION['idPromotion'])){
+            $date = $this->model->date->getAll($_SESSION['idPromotion']);
+            $dateActuelle = date('Y-m-d H:i');
+
+            if($dateActuelle >= $date['debutVote'] && $dateActuelle <= $date['finVote']){
+                $nombreCandidature = $this->model->candidature->getNombreValidateCandidature($_SESSION['idPromotion']);
+                $candidatures = $this->model->candidature->getAllCandidatureValidateByIdPromotion($_SESSION['idPromotion']);
+                require_once VIEW.'etudiant/voter.php';
+            }
+            else{
+                header('Location: _lock');
+            }
+            
+        }
+        else{ 
+            EtudiantController::getAuth();
+        }
+    }
+    public function voter(){
+        if($this->superGlobal->noEmptyPost(['idCandidature'])){
+            $idCandidature = $this->superGlobal->post['idCandidature'];
+
+            if(!isset($_SESSION))
+                session_start();
+
+            if(isset($_SESSION['idEtudiant']) && isset($_SESSION['idPromotion'])){
+                $idEtudiant = $_SESSION['idEtudiant'];
+
+                if($this->model->vote->checkVote($idEtudiant)){
+                    $this->model->vote->setVote($idEtudiant, $idCandidature);
+                    $this->model->voix->setVoix($idCandidature);
+
+                    $notif = "voix enregistré";
+                    $nombreCandidature = $this->model->candidature->getNombreValidateCandidature($_SESSION['idPromotion']);
+                    $candidatures = $this->model->candidature->getAllCandidatureValidateByIdPromotion($_SESSION['idPromotion']);
+                    require_once VIEW.'etudiant/voter.php';
+                } 
+                else{
+                    $date = $this->model->date->getAll($_SESSION['idPromotion']);
+                    $resultatPublie = $this->model->promotion->getResultatPublie($_SESSION['idPromotion']);
+                    $resultatPublie = $resultatPublie['resultatPublie'];
+                    $dateActuelle = date('Y-m-d H:i');
+
+                    $notif = "vous ne pouvez pas voter plus d'une fois";
+                    require_once VIEW.'etudiant/acceuil.php';
+                }
+            }
+            else{
+                EtudiantController::getAuth();
+            }
+        }
+    }
+
+    public function resultat():void{
+        if(!isset($_SESSION))
+            session_start();
+    
+        if(isset($_SESSION['idPromotion'])){
+            $resultatPublie = $this->model->promotion->getResultatPublie($_SESSION['idPromotion']);
+            $resultatPublie = $resultatPublie['resultatPublie'];
+
+            if($resultatPublie == '1'){
+                $resultat = $this->model->voix->getResultatPromotion($_SESSION['idPromotion']);
+                require_once VIEW.'etudiant/resultat.php';
+            }
+            else{
+                header('Location: _lock');
+            }
+            
+        }
+        else{ 
+            EtudiantController::getAuth();
+        }
     }
 }

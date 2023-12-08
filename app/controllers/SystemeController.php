@@ -20,7 +20,12 @@
                     require_once VIEW.'coordination/authentification.php';
                 }
                 else if($vers == 'les-dashboard-de-la-coordination'){
-                    $this->coordination->getDashboard($_SESSION['idPromotion'], '');
+                    if(isset($_SESSION['idPromotion']) && $_SESSION['idCoordination']){
+                        $this->coordination->getDashboard($_SESSION['idPromotion'], '', $_SESSION['idCoordination']);
+                    }
+                    else{
+                        $this->coordination->getAuth();
+                    }
                 }
                 else if($vers == 'choix-groupe'){
                     require_once VIEW.'coordination/choixGroupe.php';
@@ -28,11 +33,18 @@
                 else if($vers == 'authentification etudiant'){
                     require_once VIEW.'etudiant/authentification.php';
                 }
-                else if($vers == 'option etuddiant'){
-                    $date = $this->etudiant->model->date->getAll($_SESSION['idPromotion']);
-                    $dateActuelle = date('Y-m-d H:i');
-
-                    require_once VIEW.'etudiant/accueil.php'; 
+                else if($vers == 'option etudiant'){
+                    if(isset($_SESSION['idPromotion'])){
+                        $date = $this->etudiant->model->date->getAll($_SESSION['idPromotion']);
+                        $resultatPublie = $this->etudiant->model->promotion->getResultatPublie($_SESSION['idPromotion']);
+                        $resultatPublie = $resultatPublie['resultatPublie'];
+                        $dateActuelle = date('Y-m-d H:i');
+                        require_once VIEW.'etudiant/acceuil.php';
+                    }
+                    else{
+                        $this->etudiant->getAuth();
+                    }
+                     
                 }
 
             }

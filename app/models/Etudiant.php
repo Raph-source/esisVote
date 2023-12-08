@@ -5,6 +5,8 @@ class Etudiant extends Model{
     public $date;
     public $promotion;
     public $candidature;
+    public $vote;
+    public $voix;
 
     
     public function __construct(){
@@ -12,6 +14,8 @@ class Etudiant extends Model{
         $this->date = new Date();
         $this->promotion = new Promotion();
         $this->candidature = new Candidature();
+        $this->vote = new Vote();
+        $this->voix = new Voix();
     }
 
     public function setAttribut($matricule, $password):void{

@@ -66,4 +66,30 @@ class Coordination extends Model{
         return $requete->fetch();
     }
 
+    public function checkPasseWord($oldMdp, $id):bool{
+        $requete = $this->bdd->prepare('SELECT * FROM coordination
+        WHERE mdp = :old AND id = :id');
+
+        $requete->bindParam(':old', $oldMdp);
+        $requete->bindParam(':id', $id);
+
+        $requete->execute();
+
+        $trouver = $requete->fetchAll();
+
+        if(count($trouver) > 0)
+            return true;
+        return false;
+    }
+
+    public function changePasseWord($new, $idCoordination):void{
+        $requete = $this->bdd->prepare('UPDATE coordination SET mdp = :new
+        WHERE id = :id');
+
+        $requete->bindParam(':new', $new);
+        $requete->bindParam(':id', $idCoordination);
+
+        $requete->execute();
+    }
+
 }
