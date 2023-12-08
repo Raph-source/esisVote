@@ -25,7 +25,8 @@
                     'lancer-les-votes' => 'getFormLancerVote',
                     'lancement-vote' => 'lancerVote',
                     'publier-les-resultat' => 'publierResultat',
-                    'l2' => 'choixGroupe'
+                    'l2' => 'choixGroupe',
+                    'relancer-les-votes' => 'relancerVote'
                 ],
 
                 'SystemeController' => [
@@ -48,6 +49,7 @@
             require_once MODEL.'Candidature.php';
             require_once MODEL.'Promotion.php';
             require_once MODEL.'Voix.php';
+            require_once MODEL.'Vote.php';
             require_once MODEL.'Date.php';
             require_once MODEL.'Etudiant.php';
             require_once MODEL.'Coordination.php';

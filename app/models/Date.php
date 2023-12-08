@@ -102,12 +102,19 @@ class Date extends Model{
         return $requete->fetch();
     }
 
-    public function getFinVote($idPromotion):array{
+    public function getFinVote($idPromotion){
         $requete = $this->bdd->prepare('SELECT finVote FROM date
         WHERE idPromotion = :idPromotion');
 
         $requete->bindParam('idPromotion', $idPromotion);
         $requete->execute();
         return $requete->fetch();
+    }
+
+    public function delete($idPromotion):void{
+        $requete = $this->bdd->prepare('DELETE FROM date
+        WHERE idPromotion = :idPromotion');
+        $requete->bindParam(':idPromotion', $idPromotion);
+        $requete->execute();
     }
 }

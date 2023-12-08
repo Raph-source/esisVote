@@ -419,12 +419,27 @@ class CoordinationController{
         }
     }
 
+    public function relancerVote():void{
+        if(!isset($_SESSION))
+            session_start();
+
+        if(isset($_SESSION["idPromotion"])){
+            $idPromotion = $_SESSION["idPromotion"];
+            $this->model->deleteData($idPromotion);
+            $notif = "vote relencé avec succès";
+            CoordinationController::getDashboard($idPromotion, $notif);
+
+        }
+        else{
+            CoordinationController::getAuth();
+        }
+        
+    }
     private function getDashboard($idPromotion, $notif):void{
         //recuperation des données
         $nombreCandidature = $this->model->candidature->getNumberCandidature($idPromotion);
         $nombreVoix = $this->model->voix->getNumberVoix($idPromotion);
         $finVote = $this->model->date->getFinVote($idPromotion);
-        $finVote = $finVote['finVote'];
         $voixGagnant = $this->model->voix->getVoixGagnant($idPromotion);
         $resultat = $this->model->voix->getResultatPromotion($idPromotion);
 
@@ -434,15 +449,21 @@ class CoordinationController{
             $voixGagnant = $voixGagnant['nombre'];
 
         //calcul des jours de vote restants
-        $dateActuelle = date('Y-m-d H:i');
+        if($finVote != false){    
+            $finVote = $finVote['finVote'];
+            $dateActuelle = date('Y-m-d H:i');
         
-        $finVote = strtotime($finVote);
-        $dateActuelle = strtotime($dateActuelle);
-        $diffSeconde = $finVote - $dateActuelle;
-        $jourVoteRestant = floor($diffSeconde / (60 * 60 * 24));
-
-        if($jourVoteRestant <= 0)
+            $finVote = strtotime($finVote);
+            $dateActuelle = strtotime($dateActuelle);
+            $diffSeconde = $finVote - $dateActuelle;
+            $jourVoteRestant = floor($diffSeconde / (60 * 60 * 24));
+    
+            if($jourVoteRestant <= 0)
+                $jourVoteRestant = 0;
+        }
+        else{
             $jourVoteRestant = 0;
+        }
 
         require_once VIEW.'coordination/dashboard.php';
     }

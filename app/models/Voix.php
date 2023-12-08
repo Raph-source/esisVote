@@ -50,4 +50,13 @@ class Voix extends Model{
 
         return $requete->fetch();
     }
+
+    public function delete($trouver):void{
+        foreach($trouver as $voix){
+            $requete = $this->bdd->prepare("DELETE FROM voix
+            WHERE idCandidature = :idCandidature");
+            $requete->bindParam(":idCandidature", $voix['idCandidature']);
+            $requete->execute();
+        }
+    }
 }

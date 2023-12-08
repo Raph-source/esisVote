@@ -6,6 +6,7 @@ class Coordination extends Model{
     public $date;
     public $promotion;
     public $voix;
+    public $vote;
 
     public function __construct(){
         parent::__construct();
@@ -13,6 +14,7 @@ class Coordination extends Model{
         $this->date = new Date();
         $this->promotion = new Promotion();
         $this->voix = new Voix();
+        $this->vote = new Vote();
     }
     public function setAttribut($pseudo, $password):void{
         $this->pseudo = $pseudo;
@@ -43,6 +45,16 @@ class Coordination extends Model{
         $trouver = $requete->fetch();
 
         return $trouver;
+    }
+
+    public function deleteData($idPromotion):void{
+        $trouver = $this->candidature->getAllCandidatureByIdPromotion($idPromotion);
+
+        //suppression des données
+        $this->voix->delete($trouver);
+        $this->vote->delete($trouver);
+        $this->date->delete($idPromotion);
+        $this->candidature->delete($idPromotion);
     }
 
 }
