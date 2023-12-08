@@ -13,8 +13,8 @@
                 if($vers == 'authentification-coordination'){
                     require_once VIEW.'coordination/authentification.php';
                 }
-                else if($vers == 'les-options-de-la-coordination'){
-                    require_once VIEW.'coordination/option.php';
+                else if($vers == 'les-dashboard-de-la-coordination'){
+                    require_once VIEW.'coordination/dashboard.php';
                 }
                 else if($vers == 'choix-groupe'){
                     require_once VIEW.'coordination/choixGroupe.php';

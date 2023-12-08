@@ -5,12 +5,14 @@ class Coordination extends Model{
     public $candidature;
     public $date;
     public $promotion;
+    public $voix;
 
     public function __construct(){
         parent::__construct();
         $this->candidature = new Candidature();
         $this->date = new Date();
         $this->promotion = new Promotion();
+        $this->voix = new Voix();
     }
     public function setAttribut($pseudo, $password):void{
         $this->pseudo = $pseudo;

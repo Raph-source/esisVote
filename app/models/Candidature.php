@@ -46,5 +46,18 @@ class Candidature extends Model{
             $requete->bindParam(":idCandidature", $idCandidature);
             $requete->execute();
         }
+
+        public function getNumberCandidature($idPromotion):int{
+            $requete = $this->bdd->prepare("SELECT * FROM cadidature AS c
+            INNER JOIN etudiant AS e
+            ON e.id = c.idEtudiant
+            WHERE e.idPromotion = :idPromotion");
+
+            $requete->bindParam(":idPromotion", $idPromotion);
+            
+            $trouver = $requete->fetchAll();
+
+            return count($trouver);
+        }
     
 }

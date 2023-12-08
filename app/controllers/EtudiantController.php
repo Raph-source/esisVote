@@ -48,4 +48,21 @@ class EtudiantController{
             require_once VIEW.'etudiant/authentification.php';
         }
     }
+
+    public function getFormPostuler(){
+        if(!isset($_SESSION['idPromotion'])){
+            $date = $this->model->date->getAll($_SESSION['idPromotion']);
+            $dateActuelle = date('Y-m-d H:i');
+
+            if($dateActuelle >= $date['debutCandidature'] && $dateActuelle <= $date['finCandidature']){
+                require_once VIEW.'etudiant/postuler.php';
+            }
+            else{
+                header('Location: _lock');
+            }
+        }
+        else{
+            EtudiantController::getAuth();
+        }
+    }
 }

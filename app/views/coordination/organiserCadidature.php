@@ -43,7 +43,7 @@
 <?php
   endif;
 ?>
-<a href="retour?vers=les-options-de-la-coordination">Retour</a>
+<a href="retour?vers=les-dashboard-de-la-coordination">Retour</a>
 <?php
   require_once FOOTER;
 ?>

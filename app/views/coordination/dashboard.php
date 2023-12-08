@@ -1,68 +1,34 @@
 <?php
-  $title = "dashboard";
-  require_once HEADER;
-
+    $title = "choix groupe";
+    require_once HEADER;
 ?>
-<?php if(count($trouver) != 0):?>
-  <table>
-    <thead>
-      <tr>
-      <th class="ml-5">profil</th>
-        <th class="ml-5">Nom</th>
-        <th>Post_nom</th>
-        <th>Prenom</th>
-        <th>pourcentage</th>
-        <th>confession	</th>
-        <th>motivation</th>
-        <th>vidéo campagne</th>
-        <th>decision</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-      foreach($trouver as $candidatures):
-      ?>
-        <tr>
-          <td class="py-1"> <img src="<?php echo $candidatures['photo']?>" alt="image"/> </td>
-          <td><?php echo $candidatures['nom'];?></td>
-          <td><?php echo $candidatures['post_nom'];?></td>
-          <td><?php echo $candidatures['prenom'];?></td>
-          <td><?php echo $candidatures['pourcentage'];?></td>
-          <td><?php echo $candidatures['confession'];?></td>
-          <td><?php echo substr($candidatures['projet'], 0,10)?>
-            <a href="dashboard1.php?idCandidature=<?php echo $candidatures['idcandidature'];?>"></a>
-            </td>
-            <td>                                        
-                <button type="button">
-                  <span id="video-<?php echo $candidatures['idcandidature']; ?>" style="display:none;"><?php echo $candidatures['video']; ?></span>
-                  Voir vidéo
-                </button>
-              </div>
-            </td>
-          <td>
-          <button type="button">
-                  <a href="valider-la-candidature?idCandidature=<?php echo $candidatures['idcandidature'];?>" style="color:white;"> Valider</a>
-              </button>
-              <button type="button">
-                  <a href="supprimer-la-candidature?idCandidature=<?php echo $candidatures['idcandidature']; ?>" style="color:white;"> Supprimer</a>
-              </button>
-        </tr>
-      <?php 
-    endforeach;
-    ?>
-  <?php else:?>
-        <h1>Aucune cadidature</h1>
-  <?php endif?>  
-  </tbody>
-</table>
-<a href="retour?vers=les-options-de-la-coordination">Retour</a>
+<a href="voir-les-candidatures">voir les candidatures</a><br>
+<a href="lancer-les-candidatures">oganiser les candidatures</a><br>
+<a href="lancer-les-votes">lancer les votes</a><br>
+<a href="publier-les-resultat">publlier les resultats</a><br>
+<a href="relancer-les-votes">relancer les votes</a><br>
 <?php
-  if (isset($notif)){
-    echo $notif;
-  }
+    echo 'nombre candidature '. $nombreCandidature . '<br>';
+    echo 'nombre voix ' . $nombreVoix . '<br>';
+    echo 'voix gagnant '.$voixGagnant . '<br>';//qui permettra de faire la bare de progression 
+    echo 'jourVote restant '.$jourVoteRestant . '<br>';
 ?>
 
 <?php
-  require_once FOOTER;
+    if(isset($notif))
+        echo $notif;
 ?>
+<!-- le bouton retour-->
+<?php if(isset($_SESSION['idPromotion'])):?>
+    <?php if($_SESSION['idPromotion'] == 1):?>
+        <a href="retour?vers=authentification-coordination">Retour</a>
+    <?php else:?>
+        <a href="retour?vers=choix-groupe">Retour</a>
+    <?php endif?>
+<?php else:?>
+    <?php header("Location: retour?vers=authentification-coordination")?>
+<?php endif?>
 
+<?php
+    require_once FOOTER;
+?>

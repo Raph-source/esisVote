@@ -102,5 +102,12 @@ class Date extends Model{
         return $requete->fetch();
     }
 
-    
+    public function getFinVote($idPromotion):array{
+        $requete = $this->bdd->prepare('SELECT finVote FROM date
+        WHERE idPromotion = :idPromotion');
+
+        $requete->bindParam('idPromotion', $idPromotion);
+        $requete->execute();
+        return $requete->fetch();
+    }
 }

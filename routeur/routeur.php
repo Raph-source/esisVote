@@ -10,12 +10,13 @@
             $this->allRequest = [
                 'EtudiantController' => [
                     'index' => 'getAuth',
-                    'autentification-etudiant'=> 'authentification'
+                    'autentification-etudiant'=> 'authentification',
+                    'postuler' => 'getFormPostuler'
                 ],
 
                 'CoordinationController' => [
                     'motCleCoord' => 'getAuth',
-                    'voir-les-candidatures' => 'getDashboard',
+                    'voir-les-candidatures' => 'getCandidature',
                     'authentification-coordination' => 'authentification',
                     'valider-la-candidature'=> 'validerCandiature',
                     'supprimer-la-candidature'=> 'supprimerCandiature',
@@ -46,6 +47,7 @@
             require_once MODEL.'Model.php';
             require_once MODEL.'Candidature.php';
             require_once MODEL.'Promotion.php';
+            require_once MODEL.'Voix.php';
             require_once MODEL.'Date.php';
             require_once MODEL.'Etudiant.php';
             require_once MODEL.'Coordination.php';
