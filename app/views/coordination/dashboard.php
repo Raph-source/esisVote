@@ -6,7 +6,7 @@
 <a href="lancer-les-candidatures">oganiser les candidatures</a><br>
 <a href="lancer-les-votes">lancer les votes</a><br>
 <a href="publier-les-resultat">publlier les resultats</a><br>
-<a href="relancer-les-votes">relancer les votes</a><br>
+<a href="relancer-les-votes">relancer les elections</a><br>
 <?php
     echo 'nombre candidature '. $nombreCandidature . '<br>';
     echo 'nombre voix ' . $nombreVoix . '<br>';
