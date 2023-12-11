@@ -13,7 +13,7 @@
                     'autentification-etudiant'=> 'authentification',
                     'postuler' => 'getFormPostuler',
                     'candidature etudiant' => 'postuler',
-                    'voter' => 'getFormVoter',
+                    'voter' => 'getPageVoter',
                     'voix etudiant' => 'voter',
                 ],
 

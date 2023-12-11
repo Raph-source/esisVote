@@ -22,10 +22,32 @@ class Candidature extends Model{
         c.video AS video,
         c.photo AS photo,
         c.projet AS projet        
-
         FROM candidature AS c 
-            INNER JOIN etudiant AS e ON c.idEtudiant = e.id
-            WHERE e.idPromotion = :idPromotion");
+        INNER JOIN etudiant AS e ON c.idEtudiant = e.id
+        WHERE e.idPromotion = :idPromotion");
+        
+        $requete->bindParam(":idPromotion", $idPromotion);
+        
+        $requete->execute();
+
+        $trouver = $requete->fetchAll();
+
+        return $trouver;
+    }
+
+    public function getAllCandidatureValidateByIdPromotion($idPromotion):array{
+        $requete = $this->bdd->prepare("SELECT e.nom AS nom, 
+        e.postNom AS postNom,
+        e.prenom AS prenom,
+        e.idPromotion AS idPromotion,
+        c.id AS idCandidature,
+        c.idEtudiant AS idEtudiant,
+        c.video AS video,
+        c.photo AS photo,
+        c.projet AS projet        
+        FROM candidature AS c 
+        INNER JOIN etudiant AS e ON c.idEtudiant = e.id
+        WHERE e.idPromotion = :idPromotion AND status = 1");
         
         $requete->bindParam(":idPromotion", $idPromotion);
         
@@ -47,6 +69,17 @@ class Candidature extends Model{
         return count($trouver);
     }
 
+    public function getNombreValidateCandidature($idPromotion):int{
+        $requete = $this->bdd->prepare("SELECT * FROM candidature AS c
+        INNER JOIN etudiant AS e
+        ON c.idEtudiant = e.id
+        WHERE e.idPromotion = :idPromotion AND status = 1");
+        $requete->bindParam(":idPromotion", $idPromotion);
+        $requete->execute();
+        $trouver = $requete->fetchAll();
+
+        return count($trouver);
+    }
     //cette méthode valide un candidat
     public function validerCandidat($idCandidature):void{
         $requete = $this->bdd->prepare("UPDATE candidature SET status = 1 

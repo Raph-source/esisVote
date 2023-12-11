@@ -2,23 +2,22 @@
     $title = "voter";
     require_once HEADER;
 ?>
+    <?php
+        if(isset($notif))
+            echo $notif;
+    ?>
     <?php if($nombreCandidature > 0):?>
-        <?php foreach($candidats as $data):?>
+        <?php foreach($candidatures as $data):?>
 
         <img src="<?php echo $data['photo'] ?>" alt="" width="200" height="200">
         <h4><?php echo $data['nom'] . ' ' . $data['postNom'] . ' ' . $data['prenom']; ?></h4>
-        <p><?php echo $data['filiere']; ?></p>
 
-        <?php if($tempsDeVote):?>
-            <form action="voix etudiant" method="post">
-                <input type="hidden" name="idCandidature" value="<?php echo $data['idCandidature'];?>"><br>
-                <input type="submit" value="Voter">
-            </form>
-        <?php else:?>
-            <button id="disabledVoter">Valider</button>
-        <?php endif; ?>
+        <form action="voix etudiant" method="post">
+            <input type="hidden" name="idCandidature" value="<?php echo $data['idCandidature'];?>"><br>
+            <input type="submit" value="Voter">
+        </form>
         
-        <video src="<?php echo $data['video'];?>"></video>
+        <video src="<?php echo $data['video'];?>" width="200" height="200" controls></video>
         <p><?php echo $data['projet'];?></p>
 
         <?php endforeach;?>
