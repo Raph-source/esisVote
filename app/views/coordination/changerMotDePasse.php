@@ -12,6 +12,7 @@
         if(isset($notif))
             echo $notif;
     ?>
+    <a href="retour?vers=les-dashboard-de-la-coordination">Retour</a>
 <?php
     require_once FOOTER
 ?>
