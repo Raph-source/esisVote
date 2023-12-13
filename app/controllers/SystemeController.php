@@ -33,7 +33,7 @@
                 else if($vers == 'authentification etudiant'){
                     require_once VIEW.'etudiant/authentification.php';
                 }
-                else if($vers == 'option etuddiant'){
+                else if($vers == 'option etudiant'){
                     if(isset($_SESSION['idPromotion'])){
                         $date = $this->etudiant->model->date->getAll($_SESSION['idPromotion']);
                         $resultatPublie = $this->etudiant->model->promotion->getResultatPublie($_SESSION['idPromotion']);

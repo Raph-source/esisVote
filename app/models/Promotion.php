@@ -4,9 +4,9 @@ class Promotion extends Model{
     public function setResultPublierTrue($idPromotion):void{
         $requete = $this->bdd->prepare('UPDATE promotion 
         SET resultatPublie = true
-        WHERE idpromotion = :idpromotion');
+        WHERE id = :idPromotion');
 
-        $requete->bindParam(':idpromotion', $idPromotion);
+        $requete->bindParam(':idPromotion', $idPromotion);
         $requete->execute();
     }
 

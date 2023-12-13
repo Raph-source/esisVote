@@ -180,9 +180,18 @@ class EtudiantController{
             session_start();
         
         if(isset($_SESSION['idPromotion'])){
-            $nombreCandidature = $this->model->candidature->getNombreValidateCandidature($_SESSION['idPromotion']);
-            $candidatures = $this->model->candidature->getAllCandidatureValidateByIdPromotion($_SESSION['idPromotion']);
-            require_once VIEW.'etudiant/voter.php';
+            $date = $this->model->date->getAll($_SESSION['idPromotion']);
+            $dateActuelle = date('Y-m-d H:i');
+
+            if($dateActuelle >= $date['debutVote'] && $dateActuelle <= $date['finVote']){
+                $nombreCandidature = $this->model->candidature->getNombreValidateCandidature($_SESSION['idPromotion']);
+                $candidatures = $this->model->candidature->getAllCandidatureValidateByIdPromotion($_SESSION['idPromotion']);
+                require_once VIEW.'etudiant/voter.php';
+            }
+            else{
+                header('Location: _lock');
+            }
+            
         }
         else{ 
             EtudiantController::getAuth();
@@ -220,6 +229,28 @@ class EtudiantController{
             else{
                 EtudiantController::getAuth();
             }
+        }
+    }
+
+    public function resultat():void{
+        if(!isset($_SESSION))
+            session_start();
+    
+        if(isset($_SESSION['idPromotion'])){
+            $resultatPublie = $this->model->promotion->getResultatPublie($_SESSION['idPromotion']);
+            $resultatPublie = $resultatPublie['resultatPublie'];
+
+            if($resultatPublie == '1'){
+                $resultat = $this->model->voix->getResultatPromotion($_SESSION['idPromotion']);
+                require_once VIEW.'etudiant/resultat.php';
+            }
+            else{
+                header('Location: _lock');
+            }
+            
+        }
+        else{ 
+            EtudiantController::getAuth();
         }
     }
 }

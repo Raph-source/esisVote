@@ -15,6 +15,7 @@
                     'candidature etudiant' => 'postuler',
                     'voter' => 'getPageVoter',
                     'voix etudiant' => 'voter',
+                    'voirResultat' => 'resultat'
                 ],
 
                 'CoordinationController' => [

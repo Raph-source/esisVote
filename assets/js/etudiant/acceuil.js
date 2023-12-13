@@ -21,7 +21,7 @@ if(voter !== null){
 }
 
 if(voirResultat !== null){
-    postuler.addEventListener('click', function(){
+    voirResultat.addEventListener('click', function(){
         window.location.href = "voirResultat";
     });
 }
