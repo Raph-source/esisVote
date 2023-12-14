@@ -1,0 +1,51 @@
+.container
+{
+    .div-info{
+        position: relative;
+        a{
+            top: 3.5em;
+            left: 2em;
+            position: absolute;
+            color: white;
+            svg{
+                stroke: rgb(255, 255, 255);
+            }
+        }
+    }
+    .div-form{
+        flex-direction: column;
+        form{
+            margin-top: 5em;
+        }
+        .info-candidature{
+            width: 41%;
+            .infos
+            {
+                margin-top: 5em;
+                div
+                {
+                    margin-top: 1em;
+                    background-color: rgb(224, 255, 246);
+                    padding: 0.5em;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    padding-left: 2em;
+                    h4{
+                        color: rgb(90, 90, 90);
+                    }
+                    span{
+                        font-size: 18px;
+                        margin-left: 1em;
+                        font-weight: bold;
+                        color: rgb(90, 90, 90);
+                    }
+                }
+                .fin{
+                    background-color: rgb(255, 250, 201);
+                }
+            }
+        }
+
+    }
+}

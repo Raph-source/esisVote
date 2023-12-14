@@ -47,6 +47,9 @@ html, body {
   width: 5em;
   object-fit: contain;
 }
+.container .div-info p {
+  display: none;
+}
 
 .container .div-form {
   height: 85%;
@@ -155,6 +158,7 @@ html, body {
     width: 15em;
   }
   .container .div-info p {
+    display: block;
     position: absolute;
     width: 18em;
     left: 2.5em;

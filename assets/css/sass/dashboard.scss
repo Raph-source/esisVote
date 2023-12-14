@@ -15,9 +15,11 @@ html,body
     position: absolute;
     padding: 1em;
     top: 0;
-    width: 100%;
+    width: 20em;
     height: 100%;
     background-color: rgb(248, 248, 248);
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
     .info{
         display: flex;
         align-items: center;
@@ -32,18 +34,20 @@ html,body
             margin-right: 1em;
             span{
                 font-weight: bold;
-                color: white;
+                color: rgb(255, 255, 255);
+                z-index: 2;
             }
         }
         p{
             font-weight: bolder;
-        }
+        }  
     }
     .options{
         margin-top: 3em;
         svg{
             height: 25px;
             width: 25px;
+            transition: all .3s ease-in-out;
         }
         a{
             display: flex;
@@ -52,14 +56,33 @@ html,body
             padding: 0.5em;
             font-weight: 500;
             border-radius: 3px;
-            color: black;
+            color: rgb(54, 54, 54);
             margin-top: 0.8em;
+            transition: all .3s ease-in-out;
             span{
                 margin-left: 0.8em;
+            }
+            &:hover{
+                background-color: rgb(70, 250, 151);
+                color: rgb(255, 255, 255);
+            }
+            &:hover>svg{
+                stroke :white;
             }
         }
     }
 }
+.aside-visible
+{
+    transform: translateX(0);
+}
+.container
+{
+    .aside-bar-desktop{
+        display: none;
+    }
+}
+
 header
 {
     height: 4em;
@@ -68,6 +91,9 @@ header
     position: fixed;
     width: 100%;
     background-color: #ddf9ff;
+    .info{
+        display: none;
+    }
     .barre{
         width: 2em;
         cursor: pointer;
@@ -77,7 +103,8 @@ header
             display: block;
             height: 5px;
             width: 100%;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
+            border-radius: 5px;
             background-color: rgb(88, 88, 88);
             &:nth-child(1){
                 width: 80%;
@@ -89,11 +116,13 @@ header
     }
     h3{
         margin-left: 1em;
-        font-size: 20px;
+        margin-top: .2em;
+        font-size: 22px;
     }
     img{
-        height: 2.5em;
-        width: 2.5em;
+        margin-top: -.3em;
+        height: 2.6em;
+        width: 2.6em;
         object-fit: contain;
     }
 }
@@ -201,17 +230,9 @@ header
         }
         
     }
-    .card-statistique
-    {
-        border-radius: $radius-value;
-        padding: 1em;
-        background-color: white;
-        height: 10em;
-        margin-top: 1em;
-    }
     .card-option2,.card-option3{
         cursor: pointer;
-       /* background-color: rgb(128, 255, 185);*/
+        background-color: rgb(128, 255, 185);
         width: 100%;
         border-radius: $radius-value;
         height: 5em;
@@ -230,6 +251,7 @@ header
     }
 }
 @media only screen and (min-width:520px) {
+
     .container .card-statistique
     {
         height: 15em;
@@ -268,8 +290,151 @@ header
             height: 8em;
         }
     }
+    .cards-option{
+        display: flex;
+        .card-option2{
+            margin-right: 1em;
+        }
+        .card-option3{
+            width: 80%;
+        }
+    }
 }
-.container .sidebar-desktop
-{
-    
+
+@media only screen and (min-width:770px) {
+    header {
+        .barre{
+            display: none;
+        }
+        img{
+            margin-left: 2em;
+        }
+        .div{
+            align-items: center;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding-right: 5em;
+        }
+        .info{
+            display: flex;
+            align-items: center;
+            div{
+                background-color: rgb(0, 255, 179);
+                width: 3em;
+                height: 3em;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 1em;
+                span{
+                    font-weight: bold;
+                    color: rgb(255, 255, 255);
+                    z-index: 2;
+                }
+            }
+            p{
+                font-weight: bolder;
+            }
+        }
+    }
+    .container .card-option-two
+    {
+        display: flex;
+        .card-statistique{
+            width: 50%;
+        }
+        .card-option1{
+            width: 50%;
+            margin-left: 3em;
+        }
+    }
+    .container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .aside-bar-desktop{
+            display: block;
+            height: 100%;
+            width: 4em;
+            margin-right: 1em;
+            .options{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                svg{
+                    height: 30px;
+                    width: 30px;
+                    transition: all .3s ease-in-out;
+                }
+                a{
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                    padding: 0.5em;
+                    font-weight: 500;
+                    border-radius: 3px;
+                    color: rgb(54, 54, 54);
+                    margin-top: 0.8em;
+                    transition: all .3s ease-in-out;
+                    span{
+                        display: none;
+                        margin-left: 0.8em;
+                    }
+                    &:hover{
+                        background-color: rgb(70, 250, 151);
+                        color: rgb(255, 255, 255);
+                    }
+                    &:hover>svg{
+                        stroke :white;
+                    }
+                    .infobulle{
+                        display: block;
+                        padding: .5em;
+                        font-size: 12px;
+                        border-radius: 5px;
+                        position: absolute;
+                        top: 0.7em;
+                        left: 3em;
+                        background-color: rgb(80, 80, 80);
+                        color: white;
+                        width: 10em;
+                    }
+                }
+            }
+        }
+        .cards-option{
+            .card-option2{
+                height: 8em;
+            }
+            .card-option3{
+                height: 8em;
+            }
+        }
+        .contant
+        {
+            width: 90%;
+        }
+        .card-option
+        {
+            margin-bottom: 2em;
+            height: 5em;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            div{
+                height: 100%!important;
+                h5{
+                    font-size: 15px!important;
+                }
+            }
+        }
+        .card-option .div-3
+        {
+            margin-top: 0;
+            margin-left: 1em;
+        }
+    }
 }

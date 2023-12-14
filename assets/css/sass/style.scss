@@ -50,6 +50,9 @@ html,body
             width: 5em;
             object-fit: contain;
         }
+        p{
+            display: none;
+        }
     }
 }
 .container .div-form{
@@ -166,6 +169,7 @@ html,body
                 }
             }
             p{
+                display: block;
                 position: absolute;
                 width: 18em;
                 left: 2.5em;
