@@ -1,7 +1,7 @@
 <?php
 class CoordinationController{
     private $superGlobal;
-    private $model;
+    public $model;
     public function __construct(){
         $this->superGlobal = new SuperGlobal();
         $this->model = new Coordination();
@@ -83,9 +83,15 @@ class CoordinationController{
         if(!isset($_SESSION)){
             session_start();
         }
+        if(isset($_SESSION['idPromotion'])){
+            $trouver = $this->model->candidature->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
+            require_once VIEW.'coordination/candidature.php';
+        }
+        else{
+            CoordinationController::getAuth();
+        }
 
-        $trouver = $this->model->candidature->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
-        require_once VIEW.'coordination/candidature.php';
+        
     }
 
     public function validerCandiature():void{
@@ -104,11 +110,13 @@ class CoordinationController{
                     $trouver = $this->model->candidature->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
     
                     $notif = 'cadidature validée avec succès';
-                    CoordinationController::getDashboard($_SESSION['idPromotion'], $notif, $_SESSION['idCoordination']);
+                    require_once VIEW.'coordination/candidature.php';                
                 }
                 else{
+                    $trouver = $this->model->candidature->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
+
                     $notif = 'cadidature  déjà validée';
-                    CoordinationController::getDashboard($_SESSION['idPromotion'], $notif, $_SESSION['idCoordination']);
+                    require_once VIEW.'coordination/candidature.php';                
                 }
                 
             }
@@ -226,11 +234,18 @@ class CoordinationController{
             session_start();
         }
 
-        if(isset($_SESSION['idPromotion'])){
-            $idPromotion = $_SESSION['idPromotion'];
-            $periode = $this->model->date->getDateCandidatureAndVote($idPromotion);
-    
-            require_once VIEW.'coordination/lancerVote.php';
+        if(isset($_SESSION['idPromotion']) && isset($_SESSION['idCoordination'])){
+            if($this->model->promotion->getResultatPublie($_SESSION['idPromotion'])['resultatPublie'] == '0'){
+                $idPromotion = $_SESSION['idPromotion'];
+                $periode = $this->model->date->getDateCandidatureAndVote($idPromotion);
+        
+                require_once VIEW.'coordination/lancerVote.php';
+            }
+            else{
+                $notif = "vous avez déjà publié les resultats";
+                CoordinationController::getDashboard($_SESSION['idPromotion'], $notif, $_SESSION['idCoordination']);
+            }
+
         }
         else{
             CoordinationController::getAuth();
@@ -396,7 +411,7 @@ class CoordinationController{
         
                     $dateActuelle = date('Y-m-d H:i');
         
-                    if($dateActuelle > $dateFinVote){
+                    if($dateActuelle >= $dateFinVote){
                         $this->model->promotion->setResultPublierTrue($idPromotion);
         
                         $notif = "le resultat  été publié avec succès";
@@ -442,15 +457,42 @@ class CoordinationController{
         }
         
     }
+
+    public function dashBord():void{
+        if(!isset($_SESSION))
+            session_start();
+        
+        if(isset($_SESSION["idPromotion"]) && isset($_SESSION["idCoordination"])){
+            $idPromotion = $_SESSION["idPromotion"];
+            $idCoordination = $_SESSION["idCoordination"];
+
+            CoordinationController::getDashboard($idPromotion, '', $idCoordination);
+        }
+        else{
+            CoordinationController::getAuth();
+        }
+    }
     public function getDashboard($idPromotion, $notif, $idCoordination):void{
         //recuperation des données
-        $nombreCandidature = $this->model->candidature->getNumberCandidature($idPromotion);
-        $nombreVoix = $this->model->voix->getNumberVoix($idPromotion);
+        $nombreCandidature = $this->model->candidature->getNombreCandidature($idPromotion);
+        $nombreVoixs = $this->model->voix->getNumberVoix($idPromotion);
         $finVote = $this->model->date->getFinVote($idPromotion);
         $voixGagnant = $this->model->voix->getVoixGagnant($idPromotion);
         $resultat = $this->model->voix->getResultatPromotion($idPromotion);
         $coordination = $this->model->getNom($idCoordination);
         $coordination = $coordination['pseudo'];
+
+        //somme de tout les voix
+        if(count($nombreVoixs) != 0){
+            $nombreVoix = 0;
+            foreach($nombreVoixs as $voix){
+                $nombreVoix += $voix['nombre'];
+            }
+        }
+        else{
+            $nombreVoix = 0;
+        }
+
 
         if($voixGagnant == false)
             $voixGagnant = 0;
@@ -475,6 +517,16 @@ class CoordinationController{
         }
 
         require_once VIEW.'coordination/dashboard.php';
+    }
+
+    public function voirVideo(){
+        if($this->superGlobal->noEmptyGet(['video'])){
+            $video = $this->superGlobal->get['video'];
+            require_once VIEW.'coordination/voirVideo.php';
+        }
+        else{
+            header('Location: lock');
+        }
     }
 
     private function getOrganiserElection($notif):void{

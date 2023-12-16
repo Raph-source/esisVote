@@ -13,7 +13,7 @@
       <img src="<?php echo ASSETS_IMG."logoesis.png"?>" alt="">
     </div>
     <p>Remplissez tous les champs avec votre <span><b>Pseudo</b></span>
-      ainsi que votre <span><b>mot de passe</span></b> pour acceder à l'espace Admistrateur
+      ainsi que votre <span><b>mot de passe</span></b> pour acceder à l'espace etudiant
     </p>
   </div>
   <div class="div-form">

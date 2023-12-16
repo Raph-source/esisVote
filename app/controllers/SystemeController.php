@@ -46,6 +46,24 @@
                     }
                      
                 }
+                else if($vers == 'voirCandidatureCoordination'){
+                    if(!isset($_SESSION)){
+                        session_start();
+                    }
+                    if(isset($_SESSION['idPromotion'])){
+                        $trouver = $this->coordination->model->candidature->getAllCandidatureByIdPromotion($_SESSION['idPromotion']);
+                        require_once VIEW.'coordination/candidature.php';
+                    }
+                    else{
+                        $this->coordination->model->getAuth();
+                    }
+                }
+                else if($vers = "voir candidature"){
+                    $this->etudiant->getPageVoter();
+                }
+                else{
+                    header('Location: 404');
+                }
 
             }
         }

@@ -1,60 +1,80 @@
-<?php
-  $title = "candidature";
-  require_once HEADER;
 
+
+<?php
+  $title = "Lancer les votes";
+  $style = ASSETS_CSS."style.css";
+  $style1 = ASSETS_CSS."org.css";
+  $style2 = ASSETS_CSS."options.css";
+  $style3 = ASSETS_CSS."cardDiv.css";
+  require_once HEADER;
 ?>
-<?php if(count($trouver) != 0):?>
-  <table border=1>
-    <thead>
-      <tr>
-        <th>Profil</th>
-        <th>Nom</th>
-        <th>Post-nom</th>
-        <th>Prénom</th>
-        <th>motivation</th>
-        <th>vidéo campagne</th>
-        <th>decision</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-      foreach($trouver as $candidatures):
-      ?>
-        <tr>
-          <td> <img src="<?php echo $candidatures['photo']?>" alt="image" width="200" height="200"/></td>
-          <td><?php echo $candidatures['nom'];?></td>
-          <td><?php echo $candidatures['postNom'];?></td>
-          <td><?php echo $candidatures['prenom'];?></td>
-          <td><?php echo substr($candidatures['projet'], 0,10)?>
-            <a href="voir video?idCandidature=<?php echo $candidatures['idCandidature'];?>"></a>
-          </td>
-          <td>                                        
-              <video src="<?php echo $candidatures['video'];?>" width="200" height="200" display="display:play" controls></video>
-          </td>
-          <td>
-          <button type="button">
-                  <a href="valider-la-candidature?idCandidature=<?php echo $candidatures['idCandidature'];?>" style="color:white;"> Valider</a>
-              </button>
-              <button type="button">
-                  <a href="supprimer-la-candidature?idCandidature=<?php echo $candidatures['idCandidature']; ?>" style="color:white;"> Supprimer</a>
-              </button>
-        </tr>
-      <?php 
-    endforeach;
-    ?>
-  <?php else:?>
+<div class="container">
+  <div class="div-info">
+    <div class="title">
+      <img src="<?php echo ASSETS_IMG."logo.png"?>" alt="">
+    </div>
+    <div class="logo">
+      <img src="<?php echo ASSETS_IMG."logoesis.png"?>" alt="">
+    </div>
+    <a href="retour?vers=les-dashboard-de-la-coordination">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M5 12l14 0" />
+          <path d="M5 12l6 6" />
+          <path d="M5 12l6 -6" />
+        </svg>
+    </a>
+    <p>Voici la liste des candidats <span><b>valider</b></span>
+      ou<span><b> supprimer</span></b>une candidature
+    </p>
+    
+  </div>
+    <div class="div-form">
+      <h3><span>Liste des</span> <br>Candidats</h3>
+      <div class="list-candidat">
+        <?php if(count($trouver) != 0):?>
+          <?php if(isset($notif)):?>
+            <?php  echo '<span class="error" hidden>'.$notif.'</span>';?>
+          <?php endif?>
+        <?php
+          foreach($trouver as $candidatures):
+        ?>
+            <div class="card-cand">
+              <img src="<?php echo $candidatures['photo']?>" alt="image" width="200" height="200"/>
+              <h4><?php echo $candidatures['nom'].' '.' '.$candidatures['prenom'];?></h4> 
+              <div class="info">
+                  
+                <a href="voir video?video=<?php echo $candidatures['video'];?>"><button class="see">Voir la video</button></a>
+                <a href="supprimer-la-candidature?idCandidature=<?php echo $candidatures['idCandidature']; ?>" style="color:white;"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M4 7l16 0" />
+                  <path d="M10 11l0 6" />
+                  <path d="M14 11l0 6" />
+                  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+                </a>
+                <a href="valider-la-candidature?idCandidature=<?php echo $candidatures['idCandidature'];?>" style="color:white;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                <path d="M9 12l2 2l4 -4" />
+              </svg>
+              </a>
+              </div>
+             
+            </div>
+        <?php 
+        endforeach;
+        ?>
+        <?php else:?>
         <h1>Aucune cadidature</h1>
   <?php endif?>  
-  </tbody>
-</table>
-<a href="retour?vers=les-dashboard-de-la-coordination">Retour</a>
+        </div>
+    </div>
+</div>
 <?php
-  if (isset($notif)){
-    echo $notif;
-  }
-?>
-
-<?php
+  $script = ASSETS_JS.'coordination/candidature.js';
   require_once FOOTER;
 ?>
-

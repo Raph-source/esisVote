@@ -23,7 +23,7 @@ class Vote extends Model{
     }
 
     public function setVote($idEtudiant, $idCandidature):void{
-        $requete = $this->bdd->prepare('INSERT INTO vote (idEtudiant, idCandidature)
+        $requete = $this->bdd->prepare('INSERT INTO vote(idEtudiant, idCandidature)
         VALUES(:idEtudiant, :idCandidature)');
         $requete->bindParam(':idEtudiant', $idEtudiant);
         $requete->bindParam(':idCandidature', $idCandidature);

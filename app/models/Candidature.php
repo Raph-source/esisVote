@@ -58,6 +58,8 @@ class Candidature extends Model{
         return $trouver;
     }
     public function getNombreCandidature($idPromotion):int{
+        $idPromotion = intval($idPromotion);
+
         $requete = $this->bdd->prepare("SELECT * FROM candidature AS c
         INNER JOIN etudiant AS e
         ON c.idEtudiant = e.id
@@ -104,11 +106,13 @@ class Candidature extends Model{
         $trouver = $requete->fetch();
         
         //suppression des fichier du dossier
-      
-        $pathVideo = str_replace(UPLOADS_LINK, UPLOADS_PATH, $trouver["video"]);
-        $pathPhoto = str_replace(UPLOADS_LINK, UPLOADS_PATH, $trouver["photo"]);
-        unlink($pathVideo);
-        unlink($pathPhoto);
+        if($trouver != false){
+            $pathVideo = str_replace(UPLOADS_LINK, UPLOADS_PATH, $trouver["video"]);
+            $pathPhoto = str_replace(UPLOADS_LINK, UPLOADS_PATH, $trouver["photo"]);
+            unlink($pathVideo);
+            unlink($pathPhoto);
+        }
+
 
         $requete = $this->bdd->prepare("DELETE FROM vote 
         WHERE idCandidature = :idCandidature");
@@ -124,19 +128,6 @@ class Candidature extends Model{
         WHERE id = :idCandidature");
         $requete->bindParam(":idCandidature", $idCandidature);
         $requete->execute();
-    }
-
-    public function getNumberCandidature($idPromotion):int{
-        $requete = $this->bdd->prepare("SELECT * FROM candidature AS c
-        INNER JOIN etudiant AS e
-        ON c.idEtudiant = e.id
-        WHERE e.idPromotion = :idPromotion");
-
-        $requete->bindParam(":idPromotion", $idPromotion);
-        
-        $trouver = $requete->fetchAll();
-
-        return count($trouver);
     }
     
     public function delete($idPromotion):void{

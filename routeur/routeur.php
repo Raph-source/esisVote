@@ -15,7 +15,9 @@
                     'candidature etudiant' => 'postuler',
                     'voter' => 'getPageVoter',
                     'voix etudiant' => 'voter',
-                    'voirResultat' => 'resultat'
+                    'voirResultat' => 'resultat',
+                    'voir video etudiant' => 'voirVideo',
+                    'voir projet' => 'voirProjet'
                 ],
 
                 'CoordinationController' => [
@@ -32,7 +34,9 @@
                     'l2' => 'choixGroupe',
                     'relancer-les-votes' => 'relancerVote',
                     'mot de passe' => 'getFormChangerMotDePasse',
-                    'changer mot de passe' => 'changerMotDePasse'
+                    'changer mot de passe' => 'changerMotDePasse',
+                    'voir video'=> 'voirVideo',
+                    'Dashboard'=> 'dashBord'
                 ],
 
                 'SystemeController' => [

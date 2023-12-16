@@ -1,5 +1,5 @@
 <?php
-  $title = "Lancer les votes";
+  $title = "Option";
   $style = ASSETS_CSS."style.css";
   $style1 = ASSETS_CSS."org.css";
   $style2 = ASSETS_CSS."options.css";
@@ -21,10 +21,8 @@
           <path d="M5 12l6 -6" />
         </svg>
     </a>
-    <p>Remplissez tous les champs avec votre <span><b>Pseudo</b></span>
-      ainsi que votre <span><b>mot de passe</span></b> pour acceder à l'espace Admistrateur
+    <p>Choisissez une <span><b>Option</b></span>
     </p>
-    
   </div>
     <div class="div-form">
       <div class="options">

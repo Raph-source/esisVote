@@ -55,6 +55,7 @@ class Coordination extends Model{
         $this->vote->delete($trouver);
         $this->date->delete($idPromotion);
         $this->candidature->delete($idPromotion);
+        $this->promotion->setResultPublierFalse($idPromotion);
     }
 
     public function getNom($id):array{

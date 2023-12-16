@@ -46,8 +46,8 @@
           <path d="M5 12l6 -6" />
         </svg>
     </a>
-    <p>Remplissez tous les champs avec votre <span><b>Pseudo</b></span>
-      ainsi que votre <span><b>mot de passe</span></b> pour acceder à l'espace Admistrateur
+    <p>Remplissez ces champs pour <span><b>lancer</b></span>
+      <span><b>les élections</span></b>
     </p>
     
   </div>

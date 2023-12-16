@@ -1,21 +1,47 @@
 <?php
-$title = "postuler";
-require_once HEADER;
+    $title = 'password';
+    require_once HEADER;
 ?>
-  <form action="candidature etudiant" method="post" enctype="multipart/form-data">
-    <label for="photo">Insérer votre photo de profil :</label>
-    <input type="file" name="photo" id="photo" accept="image/*"><br>
-    <label for="video">Insérer une vidéo  pour votre campagne :</label>
-    <input type="file" name="video" id="video" accept="video/*"><br>
-    <textarea  class="form-control" name="projet" rows="15" id="myTextarea"  placeholder="Mentionnez ici votre motivation"></textarea><br>
-    <input type="submit" value="Postuler"><br>
-    
-  </form>
-  <?php
-    if(isset($notif))
-      echo $notif;
-  ?>
-  <a href="retour?vers=option etudiant">Retour</a>
+    <form action="changer mot de passe" method="post">
+        <input type="text" name="oldMdp" id="" placeholder="Entrer l'ancien mot de passe"><br>
+        <input type="text" name="newMdp" id="" placeholder="Entrer le nouveau mot de passe"><br>
+        <input type="text" name="confMdp" id="" placeholder="Confirmer le nouveau mot de passe"><br>
+        <input type="submit" value="Valider">
+    </form>
+    <?php
+        if(isset($notif))
+            echo $notif;
+    ?>
+    <a href="retour?vers=les-dashboard-de-la-coordination">Retour</a>
 <?php
-  require_once FOOTER;
+    require_once FOOTER
+?>
+
+
+<?php
+    $title = "resultat";
+    require_once HEADER;
+?>
+<?php
+    $i = 0;
+?>
+<?php if(count($resultat) > 0):?>
+    <p>Resultat</p>
+    <?php foreach($resultat as $value):?>
+        <?php $i++;?>
+        <p>
+            <?php echo $value['nom'].' '.$value['postNom'].' '.$value['prenom'].' '.$value['nombre'];?>
+            <?php if($i == 1):?>
+                <!-- trophet premier-->
+            <?php elseif($i == 2):?>
+                <!-- trophet deuxième-->
+            <?php elseif($i == 3):?>
+                <!-- trophet troisième-->
+            <?php endif?>
+        </p>
+    <?php endforeach?>
+<?php endif?>
+<a href="retour?vers=option etudiant">Retour</a>
+<?php
+    require_once FOOTER;
 ?>

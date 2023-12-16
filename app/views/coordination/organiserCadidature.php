@@ -1,5 +1,5 @@
 <?php
-  $title = "Authentification";
+  $title = "Organiser election";
   $style = ASSETS_CSS."style.css";
   $style1 = ASSETS_CSS."org.css";
   require_once HEADER;
@@ -41,8 +41,8 @@
           <path d="M5 12l6 -6" />
         </svg>
     </a>
-    <p>Remplissez tous les champs avec votre <span><b>Pseudo</b></span>
-      ainsi que votre <span><b>mot de passe</span></b> pour acceder à l'espace Admistrateur
+    <p>Remplissez tous les champs pour <span><b>lancer la</b></span>
+      periode <span><b>des candidatures</span></b>
     </p>
     
   </div>

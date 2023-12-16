@@ -10,6 +10,14 @@ class Promotion extends Model{
         $requete->execute();
     }
 
+    public function setResultPublierFalse($idPromotion):void{
+        $requete = $this->bdd->prepare('UPDATE promotion 
+        SET resultatPublie = 0
+        WHERE id = :idPromotion');
+
+        $requete->bindParam(':idPromotion', $idPromotion);
+        $requete->execute();
+    }
     public function getIdPromotion($nom):array{
         $requete = $this->bdd->prepare('SELECT id FROM promotion
         WHERE nom = :nom');

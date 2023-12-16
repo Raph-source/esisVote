@@ -1,8 +1,8 @@
-let boutonNonValides = document.querySelectorAll('.boutonNonValide');
+// let boutonNonValides = document.querySelectorAll('.boutonNonValide');
 
-for(let i = 0; i < boutonNonValides.length; i++){
-    boutonNonValides[i].disabled = true;
-}
+// for(let i = 0; i < boutonNonValides.length; i++){
+//     boutonNonValides[i].disabled = true;
+// }
 
 let postuler = document.getElementById("postuler");
 let voter = document.getElementById("voter");
@@ -25,3 +25,11 @@ if(voirResultat !== null){
         window.location.href = "voirResultat";
     });
 }
+
+
+let btnSee = document.querySelector(".see")
+btnSee.forEach(element =>
+    element.addEventListener('click',function () {
+        element.classList.add('visible')
+    })
+)

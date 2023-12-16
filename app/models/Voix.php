@@ -8,7 +8,7 @@ class Voix extends Model{
         INNER JOIN voix AS v
         ON v.idCandidature = c.id
         WHERE e.idPromotion = :idPromotion
-        AND c.status = 1
+        AND c.status = 1 ORDER BY v.nombre DESC
         ');
         
         $requete->bindParam(':idPromotion', $idPromotion);
@@ -17,8 +17,8 @@ class Voix extends Model{
         return $requete->fetchAll();
     }
 
-    public function getNumberVoix($idPromotion):int{
-        $requete = $this->bdd->prepare("SELECT * FROM voix AS v
+    public function getNumberVoix($idPromotion){
+        $requete = $this->bdd->prepare("SELECT v.nombre AS nombre FROM voix AS v
         INNER JOIN candidature AS c
         ON v.idCandidature = c.id
         INNER JOIN etudiant AS e
@@ -30,8 +30,8 @@ class Voix extends Model{
         $requete->bindParam(":idPromotion", $idPromotion);
         $requete->execute();
         $trouver = $requete->fetchAll();
-
-        return count($trouver);
+        
+        return $trouver;
     }
 
     public function getVoixGagnant($idPromotion){

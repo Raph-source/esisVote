@@ -3,14 +3,31 @@
     $style = ASSETS_CSS."dash.css";
     require_once HEADER;
 ?>
-
+<style>
+    .aside-bar .info .close{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-left: 28%;
+        color: white;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        width: 30px;
+        background-color: red;
+        border-radius: 50%;
+        padding: 5px;
+    }
+</style>
 <div class="aside-bar">
     <div class="info">
-        <div><span>L1</span></div>
-        <p>Coordination <br>Licence 1</p>
+        <div><span><?php echo $coordination ?></span></div>
+        <p>Coordination <br><?php echo $coordination ?></p>
+        <span class= "close"><span>X</span></span>
     </div>
         <div class="options">
-        <a href="voir-les-candidatures">
+        <a href="Dashboard">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
             <path d="M4 4h6v8h-6z" />
@@ -53,9 +70,9 @@
             <path d="M9 12h6" />
             <path d="M9 16h6" />
             </svg>
-            <span>Publlier les resultats</span>
+            <span>Publier les resultats</span>
         </a>
-        <a href="relancer-les-votes">
+        <a href="#" class="relancerVote">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
             <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
@@ -117,8 +134,8 @@
     <div class="div">
         <h3>Esis vote</h3>
         <div class="info">
-            <div><span>L1</span></div>
-            <p>Coordination <br>Licence 1</p>
+            <div><span><?php echo $coordination ?></span></div>
+            <p>Coordination <br><?php echo $coordination ?></p>
         </div>
     </div>
 </header>
@@ -126,7 +143,7 @@
 <div class="container">
     <div class="aside-bar-desktop">
         <div class="options">
-                <a href="voir-les-candidatures">
+                <a href="Dashboard">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M4 4h6v8h-6z" />
@@ -170,9 +187,9 @@
                 <path d="M9 12h6" />
                 <path d="M9 16h6" />
                 </svg>
-                <span>Publlier les resultats</span>
+                <span>Publier les resultats</span>
             </a>
-            <a href="relancer-les-votes">
+            <a href="#" class="relancerVote">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
@@ -238,7 +255,7 @@
                             <h5>
                                 <?php echo 'Jours <br> Restant' ?>
                             </h5>
-                            <?php echo '<span>'. $nombreVoix .'</span>' ?>
+                            <?php echo '<span>'. $jourVoteRestant .'</span>' ?>
                     </div>
                 </div>
                 <div class="div-3">
@@ -251,19 +268,54 @@
             </div>
             <div class="card-option-two">
                 <div class="card-statistique">
-
+                    <div class="div-stat">
+                        <div class='result'>
+                        <?php if(count($resultat) > 0):?>
+                            <h4>Liste des candidats</h4>
+                            <?php $tabs = ['rgb(0, 180, 212)','rgb(255, 193, 37)',
+                            'rgb(24, 255, 255)','rgb(251, 255, 24)','rgb(255, 24, 220)',
+                            'rgb(24, 255, 159)','rgb(0, 110, 64)',
+                            'rgb(110, 75, 0)','rgb(72, 0, 68)','rgb(231, 0, 0)'];
+                            $i=0;
+                            ?>
+                            <?php foreach($resultat as $value): $voixGagnant?>
+                                <p>
+                                    <span class="ronde"><img src="<?php echo $value['photo'] ?>" alt="">
+                                    </span>
+                                    <span class="name">
+                                        <?php echo $value['nom'].' '.$value['prenom']?>
+                                    </span>
+                                        <?php if($value['nombre'] == $voixGagnant):?>
+                                            <span class="barre" style='width :40%; background-color: <?php echo $tabs[$i]?> ;'></span>
+                                           
+                                        <?php elseif($value['nombre'] != $voixGagnant AND $value['nombre'] != 0):?>
+                                            <?php  $voixGagnant++ ?>
+                                            
+                                            <span class="barre" style='width :<?php echo 40-$voixGagnant  ?>%;background-color: <?php echo $tabs[$i]?>'></span>                                            
+                                        <?php elseif($value['nombre'] == 0):?>
+                                            <span class="barre" style='width :<?php echo 4?>%;background-color: <?php echo $tabs[$i]?>'></span>
+                                            
+                                        <?php endif?>
+                                    <?php echo $value['nombre'];  ?>
+                                </p>
+                                <?php $i++; ?>
+                            <?php endforeach?>
+                            <?php endif?>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-option1" style="background-image:url('<?php echo ASSETS_IMG."Lancer.jpg" ?>')">
-                    <h3>Lancer <br>Un nouveau <br>Vote</h3>
+                <div class="card-option1" id="card-option1" style="background-image:url('<?php echo ASSETS_IMG."Lancer.jpg" ?>')">
+                    <h3>Lancer <br>Les <br>Votes</h3>
                 </div>
+                </a>
             </div>
             <div class="cards-option">
-                <div class="card-option2">
+                <div class="card-option2" id="card-option2">
                     <h3>Publier <br>les resultats</h3>
                 </div>
 
-                <div class="card-option3">
-                    <h3>Voir <br>les resultats</h3>
+                <div class="card-option3" id="card-option3">
+                    <h3>Organiser <br>les condidatures</h3>
                 </div>
             </div>
             <?php
@@ -274,21 +326,11 @@
                 echo 'voix gagnant '.$voixGagnant . '<br>';//qui permettra de faire la bare de progression 
                 echo 'jourVote restant '.$jourVoteRestant . '<br>';
             */
-            ?>  
-            <?php if(count($resultat) > 0):?>
-                <p>Resultat</p>
-                <?php foreach($resultat as $value):?>
-                    <p>
-                        <?php echo $value['nom'].' '.$value['postNom'].' '.$value['prenom'].' '.$value['nombre'];?>
-                    </p>
-                <?php endforeach?>
-            <?php endif?>
-
-                    <?php
-                        if(isset($notif))
-                            echo $notif;
-                    ?>
-
+            ?>
+                <?php
+                    if(isset($notif))
+                        echo '<span class="error" hidden>'.$notif.'</span>';
+                ?>
                 </div>
             </div>
     </div>

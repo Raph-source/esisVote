@@ -13,6 +13,7 @@ buttons.forEach(element =>
     element.addEventListener('click',function () {
         if (element.getAttribute('class') == 'boutonNonValide') {
             alert("Desolé cette option n'est pas disponible pour l'instant ")
-        }
+            console.log(element.getAttribute('class'))
+        }   
     })
 )

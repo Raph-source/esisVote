@@ -189,10 +189,52 @@ header img {
 }
 .container .card-statistique {
   border-radius: 8px;
-  padding: 1em;
+  padding: 1.5em;
   background-color: white;
-  height: 10em;
+  overflow-y: scroll;
   margin-top: 1em;
+}
+.container .card-statistique .div-stat {
+  height: 100%;
+}
+.container .card-statistique .div-stat .result{
+  padding-top: 1em;
+  height: 100%;
+}
+.container .card-statistique .div-stat .result p{
+  display: flex;
+  align-items: center;
+  margin-top: 0.9em;
+
+}
+.container .card-statistique .div-stat .result p .ronde{
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .card-statistique .div-stat .result p .ronde img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 0.5em;
+}
+
+.container .card-statistique .div-stat .result p .name{
+  margin-right: 1.5em;
+}
+.container .card-statistique .div-stat .result p .barre{
+    width: 8em;
+    height: 10px;
+    background-color: aqua;
+    color: rgb(255, 193, 37);
+    margin-right: 0.3em;
+    border-radius: 3px;
 }
 .container .card-option1 {
   cursor: pointer;
@@ -218,6 +260,7 @@ header img {
   width: 100%;
   height: 100%;
 }
+
 .container .card-option1 h3 {
   z-index: 2;
   color: white;
@@ -242,8 +285,12 @@ header img {
 }
 .container .card-option3 {
   background-color: #FEBE52;
-}
 
+}
+.container .card-option1:hover
+{
+  transition: all 0.3s ease-in-out;
+}
 @media only screen and (min-width: 520px) {
   .container .card-statistique {
     height: 15em;
@@ -287,8 +334,10 @@ header img {
   }
   .cards-option .card-option3 {
     width: 80%;
+    
   }
 }
+
 @media only screen and (min-width: 770px) {
   header .barre {
     display: none;
@@ -393,9 +442,11 @@ header img {
     width: 10em;
   }
   .container .cards-option .card-option2 {
+    transition: all .3s ease-in-out;
     height: 8em;
   }
   .container .cards-option .card-option3 {
+    transition: all .3s ease-in-out;
     height: 8em;
   }
   .container .contant {
@@ -420,3 +471,17 @@ header img {
 }
 
 /*# sourceMappingURL=dash.css.map */
+
+
+.container .card-option1:hover,
+.container .cards-option .card-option2:hover:hover,
+.container .cards-option .card-option3:hover
+{
+  transform: scale(1.01);
+}
+.container .cards-option .card-option2 {
+  transition: all .3s ease-in-out;
+}
+.container .cards-option .card-option3 {
+  transition: all .3s ease-in-out;
+}
