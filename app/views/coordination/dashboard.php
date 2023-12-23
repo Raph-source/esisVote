@@ -315,7 +315,7 @@
                 </div>
 
                 <div class="card-option3" id="card-option3">
-                    <h3>Organiser <br>les condidatures</h3>
+                    <h3>Organiser <br>les candidatures</h3>
                 </div>
             </div>
             <?php

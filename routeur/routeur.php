@@ -12,12 +12,12 @@
                     'index' => 'getAuth',
                     'autentification-etudiant'=> 'authentification',
                     'postuler' => 'getFormPostuler',
-                    'candidature etudiant' => 'postuler',
+                    'candidatureetudiant' => 'postuler',
                     'voter' => 'getPageVoter',
-                    'voix etudiant' => 'voter',
+                    'voixetudiant' => 'voter',
                     'voirResultat' => 'resultat',
-                    'voir video etudiant' => 'voirVideo',
-                    'voir projet' => 'voirProjet'
+                    'voirvideoetudiant' => 'voirVideo',
+                    'voirprojet' => 'voirProjet'
                 ],
 
                 'CoordinationController' => [
@@ -33,9 +33,9 @@
                     'publier-les-resultat' => 'publierResultat',
                     'l2' => 'choixGroupe',
                     'relancer-les-votes' => 'relancerVote',
-                    'mot de passe' => 'getFormChangerMotDePasse',
-                    'changer mot de passe' => 'changerMotDePasse',
-                    'voir video'=> 'voirVideo',
+                    'motdepasse' => 'getFormChangerMotDePasse',
+                    'changermotdepasse' => 'changerMotDePasse',
+                    'voirvideo'=> 'voirVideo',
                     'Dashboard'=> 'dashBord'
                 ],
 

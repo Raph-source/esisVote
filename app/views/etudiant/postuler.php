@@ -34,7 +34,7 @@
     <div class="logo">
       <img src="<?php echo ASSETS_IMG."logoesis.png"?>" alt="">
     </div>
-    <a href="retour?vers=authentification etudiant">
+    <a href="retour?vers=optionetudiant">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <path d="M5 12l14 0" />
@@ -48,7 +48,7 @@
     
   </div>
     <div class="div-form">
-      <form action="candidature etudiant" method="post" enctype="multipart/form-data">
+      <form action="candidatureetudiant" method="post" enctype="multipart/form-data">
           <div class="input-div">
             <div><img src="<?php echo ASSETS_IMG."gallery.png"?>" alt=""></div>
             <div class="file">

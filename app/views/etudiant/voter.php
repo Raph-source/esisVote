@@ -56,7 +56,7 @@
     <div class="logo">
       <img src="<?php echo ASSETS_IMG."logoesis.png"?>" alt="">
     </div>
-    <a href="retour?vers=option etudiant">
+    <a href="retour?vers=optionetudiant">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <path d="M5 12l14 0" />
@@ -83,9 +83,9 @@
               <img src="<?php echo $candidature['photo']?>" alt="image" width="200" height="200"/>
               <h4><?php echo $candidature['nom'].' '.' '.$candidature['prenom'];?></h4> 
               <div class="info">  
-                <a href="voir video etudiant?video=<?php echo $candidature['video'];?>"><button class="see b1">Video</button></a> 
-                <a href="voir projet?projet=<?php echo $candidature['projet'];?>"><button class="see b2">Projet</button></a>
-                <form action="voix etudiant" method="post">
+                <a href="voirvideoetudiant?video=<?php echo $candidature['video'];?>"><button class="see b1">Video</button></a> 
+                <a href="voirprojet?projet=<?php echo $candidature['projet'];?>"><button class="see b2">Projet</button></a>
+                <form action="voixetudiant" method="post">
                   <input type="hidden" name="idCandidature" value="<?php echo $candidature['idCandidature'];?>"><br>
                   <input type="submit" value="Voter">
               </form>

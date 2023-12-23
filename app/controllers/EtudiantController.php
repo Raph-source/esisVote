@@ -105,7 +105,7 @@ class EtudiantController{
                                     $video = $_FILES['video']['tmp_name'];
                                     $videoType = pathinfo($_FILES['video']['name'], PATHINFO_EXTENSION);
                                     // Check if the file is a video
-                                    $allowedVideoTypes = array('mp4', 'avi', 'mov');
+                                    $allowedVideoTypes = array('mp4', 'avi', 'mov', 'MP4');
                                     if (in_array($videoType, $allowedVideoTypes)) {
                                         // Check if the file size is within an acceptable range
                                         if ($_FILES['video']['size'] < 80000000){
@@ -245,9 +245,13 @@ class EtudiantController{
     
         if(isset($_SESSION['idPromotion'])){
             $resultatPublie = $this->model->promotion->getResultatPublie($_SESSION['idPromotion']);
+            $finVote = $this->model->date->getFinVote($_SESSION['idPromotion']);
+
+            $dateActuelle = date('Y-m-d H:i');
+
             $resultatPublie = $resultatPublie['resultatPublie'];
 
-            if($resultatPublie == '1'){
+            if($resultatPublie == '1' && $dateActuelle > $finVote['finVote']){
                 $resultat = $this->model->voix->getResultatPromotion($_SESSION['idPromotion']);
                 require_once VIEW.'etudiant/resultat.php';
             }

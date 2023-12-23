@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 02 déc. 2023 à 14:02
--- Version du serveur : 10.4.20-MariaDB
--- Version de PHP : 8.0.9
+-- Généré le : dim. 24 déc. 2023 à 11:36
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `candidature` (
   `video` varchar(255) DEFAULT NULL,
   `projet` text DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,7 @@ CREATE TABLE `coordination` (
   `id` int(11) NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
   `mdp` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `coordination`
@@ -69,16 +69,16 @@ CREATE TABLE `date` (
   `debutVote` datetime DEFAULT NULL,
   `finVote` datetime DEFAULT NULL,
   `idPromotion` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `date`
 --
 
 INSERT INTO `date` (`id`, `debutCandidature`, `finCandidature`, `debutVote`, `finVote`, `idPromotion`) VALUES
-(1, '2023-12-02 12:25:00', '2023-12-02 12:25:00', '2023-12-06 14:36:00', '2023-12-07 14:41:00', 1),
-(2, '2023-12-03 14:59:00', '2023-12-03 14:59:00', '2023-12-07 15:00:00', '2023-12-08 15:00:00', 2),
-(3, '2023-12-04 15:01:00', '2023-12-04 15:01:00', '2023-12-06 15:01:00', '2023-12-07 15:01:00', 3);
+(4, '2023-12-23 10:05:00', '2023-12-26 10:06:00', '2023-12-27 10:14:00', '2023-12-30 10:15:00', 1),
+(5, '2023-12-23 10:19:00', '2023-12-26 10:19:00', '2023-12-27 10:20:00', '2023-12-30 10:20:00', 2),
+(6, '2023-12-23 10:21:00', '2023-12-26 10:21:00', '2023-12-27 10:21:00', '2023-12-30 10:21:00', 3);
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,25 @@ CREATE TABLE `etudiant` (
   `matricule` varchar(10) DEFAULT NULL,
   `mdp` varchar(100) DEFAULT NULL,
   `idPromotion` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `etudiant`
+--
+
+INSERT INTO `etudiant` (`id`, `nom`, `postNom`, `prenom`, `matricule`, `mdp`, `idPromotion`) VALUES
+(1, 'ilunga', 'kayembe', 'raph', '20ik061', '1234', 1),
+(2, 'ilonga', 'mabgau', 'aggee', '20ik058', '1234', 1),
+(3, 'kalanga', 'muwaya', 'jeanne', '20ik064', '1234', 1),
+(4, 'kabila', 'wa kabila', 'blessing', '20ik055', '1234', 1),
+(5, 'ali', 'abdoul', 'ali', '20ij054', '1234', 2),
+(6, 'kalonda', 'gloria', 'gloria', '20kk053', '1234', 2),
+(7, 'musele', 'dan', 'dan', '20ij053', '1234', 2),
+(8, 'kalonda', 'kalonda', 'julie', '20kk153', '1234', 2),
+(9, 'mukebo', 'kalasa', 'ruth', '22mk275', '1234', 3),
+(10, 'mulumba', 'kabongo', 'dassaint', '20kk050', '1234', 3),
+(11, 'kasongo', 'kasongo', 'dan', '22mk279', '1234', 3),
+(12, 'mulumba', 'kabongo', 'ken', '20kk052', '1234', 3);
 
 -- --------------------------------------------------------
 
@@ -107,7 +125,7 @@ CREATE TABLE `promotion` (
   `nom` varchar(15) DEFAULT NULL,
   `resultatPublie` tinyint(1) DEFAULT NULL,
   `idCoordination` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `promotion`
@@ -128,7 +146,7 @@ CREATE TABLE `voix` (
   `id` int(11) NOT NULL,
   `nombre` int(11) DEFAULT 0,
   `idCandidature` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -140,7 +158,7 @@ CREATE TABLE `vote` (
   `id` int(11) NOT NULL,
   `idCandidature` int(11) DEFAULT NULL,
   `idEtudiant` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Index pour les tables déchargées
@@ -215,13 +233,13 @@ ALTER TABLE `coordination`
 -- AUTO_INCREMENT pour la table `date`
 --
 ALTER TABLE `date`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `promotion`

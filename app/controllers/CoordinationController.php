@@ -500,10 +500,9 @@ class CoordinationController{
             $voixGagnant = $voixGagnant['nombre'];
 
         //calcul des jours de vote restants
-        if($finVote != false){    
+        if($finVote != false && $finVote['finVote'] != null){    
             $finVote = $finVote['finVote'];
             $dateActuelle = date('Y-m-d H:i');
-        
             $finVote = strtotime($finVote);
             $dateActuelle = strtotime($dateActuelle);
             $diffSeconde = $finVote - $dateActuelle;

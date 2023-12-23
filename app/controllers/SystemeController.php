@@ -30,10 +30,10 @@
                 else if($vers == 'choix-groupe'){
                     require_once VIEW.'coordination/choixGroupe.php';
                 }
-                else if($vers == 'authentification etudiant'){
+                else if($vers == 'authentificationetudiant'){
                     require_once VIEW.'etudiant/authentification.php';
                 }
-                else if($vers == 'option etudiant'){
+                else if($vers == 'optionetudiant'){
                     if(isset($_SESSION['idPromotion'])){
                         $date = $this->etudiant->model->date->getAll($_SESSION['idPromotion']);
                         $resultatPublie = $this->etudiant->model->promotion->getResultatPublie($_SESSION['idPromotion']);
@@ -55,10 +55,10 @@
                         require_once VIEW.'coordination/candidature.php';
                     }
                     else{
-                        $this->coordination->model->getAuth();
+                        $this->coordination->getAuth();
                     }
                 }
-                else if($vers = "voir candidature"){
+                else if($vers = "voircandidature"){
                     $this->etudiant->getPageVoter();
                 }
                 else{
