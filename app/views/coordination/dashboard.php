@@ -270,37 +270,50 @@
                 <div class="card-statistique">
                     <div class="div-stat">
                         <div class='result'>
-                        <?php if(count($resultat) > 0):?>
-                            <h4>Liste des candidats</h4>
-                            <?php $tabs = ['rgb(0, 180, 212)','rgb(255, 193, 37)',
-                            'rgb(24, 255, 255)','rgb(251, 255, 24)','rgb(255, 24, 220)',
-                            'rgb(24, 255, 159)','rgb(0, 110, 64)',
-                            'rgb(110, 75, 0)','rgb(72, 0, 68)','rgb(231, 0, 0)'];
-                            $i=0;
-                            ?>
-                            <?php foreach($resultat as $value): $voixGagnant?>
-                                <p>
-                                    <span class="ronde"><img src="<?php echo $value['photo'] ?>" alt="">
-                                    </span>
-                                    <span class="name">
-                                        <?php echo $value['nom'].' '.$value['prenom']?>
-                                    </span>
-                                        <?php if($value['nombre'] == $voixGagnant):?>
-                                            <span class="barre" style='width :40%; background-color: <?php echo $tabs[$i]?> ;'></span>
-                                           
-                                        <?php elseif($value['nombre'] != $voixGagnant AND $value['nombre'] != 0):?>
-                                            <?php  $voixGagnant++ ?>
-                                            
-                                            <span class="barre" style='width :<?php echo 40-$voixGagnant  ?>%;background-color: <?php echo $tabs[$i]?>'></span>                                            
-                                        <?php elseif($value['nombre'] == 0):?>
-                                            <span class="barre" style='width :<?php echo 4?>%;background-color: <?php echo $tabs[$i]?>'></span>
-                                            
-                                        <?php endif?>
-                                    <?php echo $value['nombre'];  ?>
-                                </p>
-                                <?php $i++; ?>
-                            <?php endforeach?>
-                            <?php endif?>
+                            <table>
+                                
+                                <?php if(count($resultat) > 0):?>
+                                <h4>Liste des candidats</h4>
+                                
+                                <?php $tabs = ['rgb(0, 180, 212)','rgb(255, 193, 37)',
+                                'rgb(24, 255, 255)','rgb(251, 255, 24)','rgb(255, 24, 220)',
+                                'rgb(24, 255, 159)','rgb(0, 110, 64)',
+                                'rgb(110, 75, 0)','rgb(72, 0, 68)','rgb(231, 0, 0)'];
+                                $i=0;
+                                ?>
+                                <?php foreach($resultat as $value): $voixGagnant?>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                <span class="ronde"><img src="<?php echo $value['photo'] ?>" alt="">
+                                                </span>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <span class="name">
+                                                    <?php echo $value['nom'].' '.$value['prenom']?>
+                                                </span>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p style="width:10em; border-radius:5px">
+                                                <span style="height:0.7em;width :<?php echo ($value['nombre']/$nombreVoix)*100; ?>%;background-color:<?php echo $tabs[$i]; ?>;display:block; border-radius:3px">                                                
+                                                </span>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <span>
+                                                    <?php echo $value['nombre'];  ?>
+                                                </span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <?php $i++; ?>
+                                <?php endforeach?>
+                                <?php endif?>
+                            </table>
                         </div>
                     </div>
                 </div>

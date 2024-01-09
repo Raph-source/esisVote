@@ -3,7 +3,6 @@
   $style = ASSETS_CSS."style.css";
   $style1 = ASSETS_CSS."org.css";
   $style2 = ASSETS_CSS."options.css";
-  $style3 = ASSETS_CSS."cardDiv.css";
   require_once HEADER;
 ?>
 <div class="container">

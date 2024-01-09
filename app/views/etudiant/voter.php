@@ -1,5 +1,5 @@
 <?php
-  $title = "Lancer les votes";
+  $title = "Voter | Candidat";
   $style = ASSETS_CSS."style.css";
   $style1 = ASSETS_CSS."org.css";
   $style2 = ASSETS_CSS."options.css";
@@ -7,10 +7,6 @@
   require_once HEADER;
 ?>
 <style>
-    .container .div-form
-  {
-    padding-top: 5em;
-  }
   .container .div-form .list-candidat .card-cand .info a
   {
     margin-right: 5px;
@@ -48,8 +44,9 @@
     cursor: pointer;
   }
 </style>
+
 <div class="container">
-  <div class="div-info">
+  <div class="div-info" style="position:fixed">
     <div class="title">
       <img src="<?php echo ASSETS_IMG."logo.png"?>" alt="">
     </div>
@@ -64,8 +61,8 @@
           <path d="M5 12l6 -6" />
         </svg>
     </a>
-    <p>Voté votre <span><b>candidat</b></span>
-      en cliquant sur <span><b>le bouton</span></b>vote
+    <p>Voici la liste des candidats <span><b>valider</b></span>
+      ou<span><b> supprimer</span></b>une candidature
     </p>
     
   </div>
@@ -88,17 +85,15 @@
                 <form action="voixetudiant" method="post">
                   <input type="hidden" name="idCandidature" value="<?php echo $candidature['idCandidature'];?>"><br>
                   <input type="submit" value="Voter">
-              </form>
+                </form>
               </div>
-             
             </div>
         <?php 
         endforeach;
         ?>
         <?php else:?>
-    <h1>Aucune cadidature</h1>
-  <?php endif?>
-
+        <h1>Aucune cadidature</h1>
+      <?php endif?>  
         </div>
     </div>
 </div>

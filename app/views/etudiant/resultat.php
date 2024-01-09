@@ -91,26 +91,40 @@
                             'rgb(110, 75, 0)','rgb(72, 0, 68)','rgb(231, 0, 0)'];
                             $i=1;
                         ?>
-                        <?php foreach($resultat as $value):?>
-                            <p>
-                                <span class="ronde"><img src="<?php echo $value['photo'] ?>" alt="" height='20px' width='20px' style="border-radius:50%;object-fit:cover;">
-                                </span>
-                                <span class="name">
-                                    <?php echo $value['nom'].' '.$value['prenom']?>
-                                </span>
-                                    <?php if($i == 1):?>
-                                        <span class="barre" style='width :40%; background-color: <?php echo $tabs[$i]?> ;'></span>
-                                        
-                                    <?php elseif($i == 2):?>                                      
-                                        <span class="barre" style='width :<?php echo 40-$voixGagnant  ?>%;background-color: <?php echo $tabs[$i]?>'></span>                                            
-                                    <?php elseif($i == 3):?>
-                                        <span class="barre" style='width :<?php echo 4?>%;background-color: <?php echo $tabs[$i]?>'></span>  
-                                    <?php endif?>
-                                <?php echo $value['nombre'];  ?>
-                            </p>
-                            <?php $i++; ?>
-                        <?php endforeach?>
-                        <?php endif?>
+                        <table>
+                          <?php foreach($resultat as $value):?>
+                            <tr>
+                              <td>
+                                <p>
+                                  <span class="ronde"><img src="<?php echo $value['photo'] ?>" alt="" height='20px' width='20px' style="border-radius:50%;object-fit:cover;">
+                                  </span>
+                                </p>
+                              </td>
+                              <td>
+                                <p>
+                                  <span class="name">
+                                      <?php echo $value['nom'].' '.$value['prenom']?>
+                                  </span>
+                                </p>
+                              </td>
+                              <td>
+                                    <p style="width:10em; border-radius:5px">
+                                          <span style="height:0.7em;width :<?php echo ($value['nombre'] / $totalVoix['nombre'])*100; ?>%;background-color:<?php echo $tabs[$i]; ?>;display:block; border-radius:3px">                                                
+                                          </span>
+                                      </p>
+                                  </td>
+                                  <td>
+                                      <p>
+                                          <span>
+                                              <?php echo $value['nombre'];  ?>
+                                          </span>
+                                      </p>
+                                </td>
+                            </tr>
+                              <?php $i++; ?>
+                          <?php endforeach?>
+                          <?php endif?>
+                        </table>
                     </div>
                 </div>
             </div>

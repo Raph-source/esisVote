@@ -253,6 +253,7 @@ class EtudiantController{
 
             if($resultatPublie == '1' && $dateActuelle > $finVote['finVote']){
                 $resultat = $this->model->voix->getResultatPromotion($_SESSION['idPromotion']);
+                $totalVoix = $this->model->voix->getNumberVoix($_SESSION['idPromotion'])[0];
                 require_once VIEW.'etudiant/resultat.php';
             }
             else{

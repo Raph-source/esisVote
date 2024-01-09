@@ -9,7 +9,7 @@
   require_once HEADER;
 ?>
 <div class="container">
-  <div class="div-info">
+  <div class="div-info" style="position:fixed">
     <div class="title">
       <img src="<?php echo ASSETS_IMG."logo.png"?>" alt="">
     </div>
@@ -70,7 +70,7 @@
         ?>
         <?php else:?>
         <h1>Aucune cadidature</h1>
-  <?php endif?>  
+      <?php endif?>  
         </div>
     </div>
 </div>

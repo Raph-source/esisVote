@@ -1,9 +1,8 @@
 <?php
-  $title = "Lancer les votes";
+  $title = "Vidéo | candidat";
   $style = ASSETS_CSS."style.css";
   $style1 = ASSETS_CSS."org.css";
   $style2 = ASSETS_CSS."options.css";
-  $style3 = ASSETS_CSS."cardDiv.css";
   require_once HEADER;
 ?>
 <div class="container">
@@ -22,7 +21,7 @@
           <path d="M5 12l6 -6" />
         </svg>
     </a>
-    <p>Visualiser la <span><b>video</b></span>
+    <p>Visualiser la <span><b>video </b></span>
       qui presente<span><b>votre candidat</span></b>
     </p>
     

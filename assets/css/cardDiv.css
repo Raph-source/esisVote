@@ -1,13 +1,14 @@
-
+.container .div-info{
+    width: 100%;
+}
 .container .div-form
 {    
-    padding-top: 38em;
+    padding-top: 52em;
 }
 .container .div-form h3
 {    
    margin-bottom: 1em;
    margin-left: -4em;
-
 }
 .container .div-form h3{
     font-size: 16px;
@@ -93,21 +94,27 @@
 .container .div-form .list-candidat .card-cand .visible
 {
     transform: translateY(10%);}
-@media only screen and (min-width: 520px) {
+@media only screen and (min-width: 500px) {
+    .container .div-form
+    {
+        padding-top: 10em;
+    }
     .container .div-form .list-candidat 
     {    
         display: grid;
         grid-template-columns: repeat(2,1fr);
         grid-gap: 1em;
-    }
-    .container .div-form
-    {    
-        padding-top: 8em;
+        overflow-y: scroll;
     }
 }
 @media only screen and (min-width: 910px) {
+    .container .div-info
+    {
+        width: 45%;
+    }
     .container .div-form
-    {    
+    {
         padding-top: 0em;
+        margin-left: 50%;
     }
 }
