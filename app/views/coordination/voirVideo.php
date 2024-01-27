@@ -1,5 +1,5 @@
 <?php
-  $title = "Lancer les votes";
+  $title = "Video";
   $style = ASSETS_CSS."style.css";
   $style1 = ASSETS_CSS."org.css";
   $style2 = ASSETS_CSS."options.css";

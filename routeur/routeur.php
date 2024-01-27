@@ -33,7 +33,7 @@
                     'publier-les-resultat' => 'publierResultat',
                     'l2' => 'choixGroupe',
                     'relancer-les-votes' => 'relancerVote',
-                    'motdepasse' => 'getFormChangerMotDePasse',
+                    'mot-de-passe' => 'getFormChangerMotDePasse',
                     'changermotdepasse' => 'changerMotDePasse',
                     'voir-video'=> 'voirVideo',
                     'Dashboard'=> 'dashBord'
