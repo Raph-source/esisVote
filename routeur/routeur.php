@@ -35,7 +35,7 @@
                     'relancer-les-votes' => 'relancerVote',
                     'motdepasse' => 'getFormChangerMotDePasse',
                     'changermotdepasse' => 'changerMotDePasse',
-                    'voirvideo'=> 'voirVideo',
+                    'voir-video'=> 'voirVideo',
                     'Dashboard'=> 'dashBord'
                 ],
 
