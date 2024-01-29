@@ -4,7 +4,7 @@ class Model{
 
     public function __construct(){
         //connexion à la bdd mysql
-        $this->bdd = new PDO("mysql:host=localhost;dbname=esisvote", "root", '');
+        $this->bdd = new PDO("mysql:host=localhost;dbname=esisvote", "raph", 'mk271319');
     }
 
     //cette méthode permet gérer l'authentification
