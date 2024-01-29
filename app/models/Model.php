@@ -5,7 +5,7 @@ class Model{
     public function __construct(){
         //connexion à la bdd mysql
         try{
-            $this->bdd = new PDO("mysql:dbname=esislqpm_esisvote; charset=utf8; host=68.65.122.152;", "esislqpm_esisvotedb", "YEq7Tp0QDH5J");
+            $this->bdd = new PDO("mysql:dbname=esislqpm_esisvote; charset=utf8; host=68.65.122.152;", "", "");
             $this->bdd->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
         }
         catch(Exception $e){
