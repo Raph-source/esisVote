@@ -4,7 +4,14 @@ class Model{
 
     public function __construct(){
         //connexion à la bdd mysql
-        $this->bdd = new PDO("mysql:host=68.65.122.152;dbname=esislqpm_esisvote", "esislqpm_raph", "aSaB1ew__y4N");
+        try{
+            $this->bdd = new PDO("mysql:dbname=esislqpm_esisvote; charset=utf8; host=68.65.122.152;", "esislqpm_raph", "aSaB1ew__y4N");
+            $this->bdd->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
+        
     }
 
     //cette méthode permet gérer l'authentification
