@@ -55,14 +55,14 @@
             require_once CONTROLLER.'SystemeController.php';
 
             //inclusion des models
-            require_once MODEL.'Model.php';
-            require_once MODEL.'Candidature.php';
-            require_once MODEL.'Promotion.php';
-            require_once MODEL.'Voix.php';
-            require_once MODEL.'Vote.php';
-            require_once MODEL.'Date.php';
-            require_once MODEL.'Etudiant.php';
-            require_once MODEL.'Coordination.php';
+            // require_once MODEL.'Model.php';
+            // require_once MODEL.'Candidature.php';
+            // require_once MODEL.'Promotion.php';
+            // require_once MODEL.'Voix.php';
+            // require_once MODEL.'Vote.php';
+            // require_once MODEL.'Date.php';
+            // require_once MODEL.'Etudiant.php';
+            // require_once MODEL.'Coordination.php';
 
 
             //instantiation du controleur et déclanchement de la méthode
