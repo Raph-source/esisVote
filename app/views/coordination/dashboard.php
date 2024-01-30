@@ -2,6 +2,7 @@
     $title = "dashboard";
     $style = ASSETS_CSS."dash.css";
     require_once HEADER;
+    echo date('Y-m-d H:i');
 ?>
 <style>
     .aside-bar .info .close{
