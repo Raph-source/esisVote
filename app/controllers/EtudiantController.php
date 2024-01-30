@@ -213,7 +213,7 @@ class EtudiantController{
 
             if(isset($_SESSION['idEtudiant']) && isset($_SESSION['idPromotion'])){
                 $idEtudiant = $_SESSION['idEtudiant'];
-
+                echo $idEtudiant; exit;
                 if($this->model->vote->checkVote($idEtudiant)){
                     $this->model->vote->setVote($idEtudiant, $idCandidature);
                     $this->model->voix->setVoix($idCandidature);
