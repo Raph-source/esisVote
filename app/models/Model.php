@@ -5,7 +5,7 @@ class Model{
     public function __construct(){
         //connexion à la bdd mysql
         try{
-            $this->bdd = new PDO("mysql:host=68.65.122.152;dbname=esislqpm_esisvote", "esislqpm_raph", "Uhjfc6c+ieCq");
+            $this->bdd = new PDO("mysql:host=localhost;dbname=esislqpm_esisvote", "esislqpm_raph", "D$!#yz8XK5Jy");
         }
         catch(Exception $e){
             echo $e->getMessage();
