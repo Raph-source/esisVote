@@ -432,7 +432,6 @@ class CoordinationController{
             else{
                 $notif = "veuillez lancer les candidatures";
                 CoordinationController::getDashboard($idPromotion, $notif, $idCoordination);
-                require_once VIEW."Coordination/dashboard.php";
             }
         }
         else{

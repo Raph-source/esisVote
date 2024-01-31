@@ -80,7 +80,7 @@ class EtudiantController{
         if(!isset($_SESSION))
             session_start();
 
-        if($_SERVER['CONTENT_LENGTH'] < 41000000){
+        if($_SERVER['CONTENT_LENGTH'] < 200000000){
             if(isset($_SESSION['idEtudiant'])){
             
                 if($this->superGlobal->noEmptyPost(['projet']) && isset($_FILES['photo']) && isset($_FILES['video'])){
@@ -92,7 +92,7 @@ class EtudiantController{
     
                         if(in_array($photoExtension, $allowedImageExtensions)){
                             // Check if the file size is within an acceptable range
-                            if($_FILES['photo']['size'] < 80000000){
+                            if($_FILES['photo']['size'] < 104857600){
                                 // Upload the photo
                                 $nomPhoto = uniqid() . '.' . $photoExtension;
                                 $cheminPhoto = UPLOADS_PATH .'imageCandidat/'. $nomPhoto;
@@ -108,7 +108,7 @@ class EtudiantController{
                                     $allowedVideoTypes = array('mp4', 'avi', 'mov', 'MP4');
                                     if (in_array($videoType, $allowedVideoTypes)) {
                                         // Check if the file size is within an acceptable range
-                                        if ($_FILES['video']['size'] < 80000000){
+                                        if ($_FILES['video']['size'] < 104857600){
                                             // Upload the video
                                             $nomVideo = uniqid() . '.' . $videoType;
                                             $cheminVideo = UPLOADS_PATH . 'videoCandidat/' . $nomVideo;
@@ -152,7 +152,7 @@ class EtudiantController{
                                 }
                             }
                             else{
-                                $notif = 'La taille d\'un fichier est trop grande';
+                                $notif = 'La taille de la photo est trop grande';
                                 require_once VIEW.'etudiant/postuler.php';
                             }
                         }
