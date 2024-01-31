@@ -59,7 +59,7 @@ class EtudiantController{
             $dateActuelle = date('Y-m-d H:i');
 
             if($dateActuelle >= $date['debutCandidature'] && $dateActuelle <= $date['finCandidature']){
-                if($this->model->candidature->getNombreCandidature($_SESSION['idPromotion']) <= 10){
+                if($this->model->candidature->getNombreCandidature($_SESSION['idPromotion']) <= 20){
                     require_once VIEW.'etudiant/postuler.php';
                 }
                 else{
