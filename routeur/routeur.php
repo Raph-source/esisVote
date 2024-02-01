@@ -21,7 +21,7 @@
                 ],
 
                 'CoordinationController' => [
-                    'motCleCoord' => 'getAuth',
+                    'coordside' => 'getAuth',
                     'voir-les-candidatures' => 'getCandidature',
                     'authentification-coordination' => 'authentification',
                     'valider-la-candidature'=> 'validerCandiature',
