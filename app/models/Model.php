@@ -6,6 +6,8 @@ class Model{
         //connexion à la bdd mysql
         try{
             $this->bdd = new PDO("mysql:host=localhost;dbname=esislqpm_esisvote", "esislqpm_raph", "D$!#yz8XK5Jy");
+            //esislqpm_raph
+            //D$!#yz8XK5Jy
         }
         catch(Exception $e){
             echo $e->getMessage();
