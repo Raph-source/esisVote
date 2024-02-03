@@ -3,7 +3,8 @@
 }
 .container .div-form
 {    
-    padding-top: 52em;
+    padding-top: 10em;
+    height: 35em;
 }
 .container .div-form h3
 {    
@@ -24,6 +25,7 @@
 .container .div-form .list-candidat 
 {    
     display: grid;
+    overflow-y: scroll;
     grid-template-columns: repeat(1,1fr);
 }
 

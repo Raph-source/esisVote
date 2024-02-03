@@ -36,7 +36,8 @@
                     'mot-de-passe' => 'getFormChangerMotDePasse',
                     'changermotdepasse' => 'changerMotDePasse',
                     'voir-video'=> 'voirVideo',
-                    'Dashboard'=> 'dashBord'
+                    'Dashboard'=> 'dashBord',
+                    'voirprojetcoord' => 'voirProjet'
                 ],
 
                 'SystemeController' => [

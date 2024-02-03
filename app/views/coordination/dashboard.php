@@ -264,7 +264,11 @@
                         <h5>
                             <?php echo 'Nombre total <br>Des voix' ?>
                         </h5>
-                    <?php echo '<span>'. $nombreVoix .'</span>' ?>
+                    <?php 
+                        echo '<span>'. $nombreVoix .'</span>';
+                        if($nombreVoix == 0)
+                            $nombreVoix = 1;
+                    ?>
                 </div>
             </div>
             <div class="card-option-two">
@@ -282,7 +286,7 @@
                                 'rgb(110, 75, 0)','rgb(72, 0, 68)','rgb(231, 0, 0)'];
                                 $i=0;
                                 ?>
-                                <?php foreach($resultat as $value): $voixGagnant?>
+                                <?php foreach($resultat as $value):?>
                                     <tr>
                                         <td>
                                             <p>
@@ -323,6 +327,7 @@
                 </div>
                 </a>
             </div>
+
             <div class="cards-option">
                 <div class="card-option2" id="card-option2">
                     <h3>Publier <br>les resultats</h3>

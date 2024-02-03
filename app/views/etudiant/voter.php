@@ -81,7 +81,7 @@
               <h4><?php echo $candidature['nom'].' '.' '.$candidature['prenom'];?></h4> 
               <div class="info">  
                 <a href="voirvideoetudiant?video=<?php echo $candidature['video'];?>"><button class="see b1">Video</button></a> 
-                <a href="voirprojet?projet=<?php echo $candidature['projet'];?>"><button class="see b2">Projet</button></a>
+                <a href="voirprojet?projet=<?php echo $candidature['idCandidature'];?>"><button class="see b2">Projet</button></a>
                 <form action="voixetudiant" method="post">
                   <input type="hidden" name="idCandidature" value="<?php echo $candidature['idCandidature'];?>"><br>
                   <input type="submit" value="Voter">

@@ -94,6 +94,18 @@ class CoordinationController{
         
     }
 
+    public function voirProjet(){
+        if($this->superGlobal->noEmptyGet(['projet'])){
+            $idCandidature = intval($this->superGlobal->get['projet']);
+            $projet = $this->model->candidature->getProjet($idCandidature);
+
+            require_once VIEW.'coordination/projet.php';
+        }
+        else{
+            header('Location: lock');
+        }
+    }
+
     public function validerCandiature():void{
         //verifer le paramètre  
         if($this->superGlobal->noEmptyGet(['idCandidature'])){

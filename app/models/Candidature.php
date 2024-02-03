@@ -96,6 +96,18 @@ class Candidature extends Model{
         $requete->execute();
     }
 
+    //cette méthode valide un candidat
+    public function getProjet($idCandidature):string{
+        $requete = $this->bdd->prepare("SELECT projet FROM candidature
+        WHERE id = :idCandidature");
+        
+        $requete->bindParam(":idCandidature", $idCandidature);
+        $requete->execute();
+        $trouver = $requete->fetch();
+
+        return $trouver['projet'];
+    }
+
     //cette méthode supprime un candidat
     public function supprimerCandidat($idCandidature):void{
         $requete = $this->bdd->prepare("SELECT video, photo FROM candidature
