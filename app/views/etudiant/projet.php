@@ -11,11 +11,14 @@
   }
   .container .div-form .video{
     position: absolute;
+    z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     background-color: rgb(215, 249, 215);;
-    width: 50%;
+    width: 80%;
+    height:30em;
+    overflow-y:scroll;
     padding: 1em;
     color: rgb(69, 94, 69);
     border-radius: 5px;

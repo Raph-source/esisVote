@@ -1,11 +1,10 @@
 .container .div-info{
     width: 100%;
-    top: 0;
 }
 .container .div-form
-{
-    padding-top: 95em;
-    height: 30em;
+{    
+    padding-top: 10em;
+    height: 35em;
 }
 .container .div-form h3
 {    
@@ -21,11 +20,12 @@
 {    
     font-size: 25px;
     color: black;
+   
 }
 .container .div-form .list-candidat 
 {    
     display: grid;
-   /* overflow-y: scroll;*/
+    overflow-y: scroll;
     grid-template-columns: repeat(1,1fr);
 }
 
