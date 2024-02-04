@@ -279,7 +279,7 @@ class EtudiantController{
         if($this->superGlobal->noEmptyGet(['projet'])){
             $idCandidature = intval($this->superGlobal->get['projet']);
             $projet = $this->model->candidature->getProjet($idCandidature);
-            $projet = mb_convert_encoding($projet, 'UTF-8', 'ISO-8859-1');
+            $projet = mb_convert_encoding($projet, 'ISO-8859-1', 'UTF-8');
 
             require_once VIEW.'etudiant/projet.php';
         }
