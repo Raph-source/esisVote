@@ -276,7 +276,7 @@ class EtudiantController{
     }
 
     public function voirProjet(){
-        header('Content-Type: text/html; charset=utf-8');
+        
                 
         if($this->superGlobal->noEmptyGet(['projet'])){
             $idCandidature = intval($this->superGlobal->get['projet']);

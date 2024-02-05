@@ -103,11 +103,10 @@ class Candidature extends Model{
         
         $requete->bindParam(":idCandidature", $idCandidature);
         $requete->execute();
-        header('Content-Type: text/html; charset=utf-8');
         $trouver = $requete->fetch();
-        
-        var_dump($trouver["projet"]);exit;
-        return $trouver['projet'];
+        $projet = htmlentities($trouver['projet'], ENT_QUOTES, 'UTF-8');
+
+        return $projet;
     }
 
     //cette méthode supprime un candidat
