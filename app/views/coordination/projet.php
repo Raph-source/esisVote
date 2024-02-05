@@ -46,7 +46,7 @@
           <path d="M5 12l6 -6" />
         </svg>
     </a>
-    <p>Projet ou <span><b>motiation</b></span>
+    <p>Projet ou <span><b>motiation ééééế</b></span>
       d'un <span><b>candidat</span></b>
     </p>
     
