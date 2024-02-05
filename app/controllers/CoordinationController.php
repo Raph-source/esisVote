@@ -99,7 +99,7 @@ class CoordinationController{
 
         if($this->superGlobal->noEmptyGet(['projet'])){
             $idCandidature = intval($this->superGlobal->get['projet']);
-            header('Content-Type: text/html; charset=utf-8');
+            
             $projet = $this->model->candidature->getProjet($idCandidature);
 
             require_once VIEW.'coordination/projet.php';

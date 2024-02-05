@@ -104,7 +104,8 @@ class Candidature extends Model{
         $requete->bindParam(":idCandidature", $idCandidature);
         $requete->execute();
         $trouver = $requete->fetch();
-
+        //header('Content-Type: text/html; charset=utf-8');
+        var_dump($trouver["projet"]);exit;
         return $trouver['projet'];
     }
 
