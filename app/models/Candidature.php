@@ -105,7 +105,7 @@ class Candidature extends Model{
         $requete->execute();
         $trouver = $requete->fetch();
         $projet = htmlentities($trouver['projet'], ENT_QUOTES, 'UTF-8');
-
+        var_dump($projet);
         return $projet;
     }
 
